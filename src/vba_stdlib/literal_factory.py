@@ -33,7 +33,7 @@ def literal_from_string(value: str) -> Any:
     if re.fullmatch(boolean_pattern, value.upper()):
         return value.upper() == "TRUE"
     if re.fullmatch(hex_pattern, value):
-        return int("0x" + value[2:])
+        return int("0x" + value[2:], 16)
     if re.fullmatch(oct_pattern, value):
         start = 2 if value[1].upper() == 'O' else 1
         return int(value[start:], 8)
