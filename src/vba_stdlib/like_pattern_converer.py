@@ -1,4 +1,4 @@
-from antlr4_vba.vbaVisitor import vba_likeVisitor
+from antlr4_vba.vbaVisitor import vbaVisitor
 
 
 class LikePatternConverter(vbaVisitor):
