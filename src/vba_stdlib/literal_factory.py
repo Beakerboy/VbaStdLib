@@ -14,7 +14,7 @@ def literal_from_string(value: str) -> Any:
     exp = "[DEde][+-]?\d\d*"
     float_pattern1 = "\.\d\d*(" + exp + ")?"
     float_pattern2 = "\d\d*" + exp
-    float_pattern3 = "\d\d" + float_pattern1
+    float_pattern3 = "\d\d\.(\d\d*)?(" + exp + ")?"
     if re.fullmatch(boolean_pattern, value.upper()):
         return value.upper() == "TRUE"
     if re.fullmatch(hex_pattern, value):
