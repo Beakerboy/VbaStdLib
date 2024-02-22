@@ -24,7 +24,8 @@ def literal_from_string(value: str) -> Any:
     month_abv = "(JAN|FEB|MAR|APR|JUN|JUL|AUG|SEP|OCT|NOV|DEC)"
     month_name = "(" + eng_month + "|" + month_abv + ")"
     date_val_part = r"(\d+|" + month_name + ")"
-    date = date_val_part + sep + date_val_part + "(" + sep + date_val_part + ")?"
+    date = (date_val_part + sep + date_val_part +
+            "(" + sep + date_val_part + ")?")
     time_pattern1 = r"(\d+(AM|PM|A|P))"
     time_pattern2 = r"(\d+[ ]?[:.][ ]?\d+([ ]?[:.][ ]?\d+)?)"
     time_pattern = "(" + time_pattern1 + "|" + time_pattern2 + ")"
