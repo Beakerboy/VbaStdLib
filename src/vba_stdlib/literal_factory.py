@@ -26,7 +26,7 @@ def literal_from_string(value: str) -> Any:
     date = date_val_part + sep + date_val_part + "(" + sep + date_val_part + ")?"
     time_pattern1 = "(\d+(AM|PM|A|P))"
     time_pattern2 = "(\d+[ ]?[:.][ ]?\d+([ ]?[:.][ ]?\d+)?)"
-    time_pattern = "(" + time_pattern1 + "|" + time_pattern2 ")"
+    time_pattern = "(" + time_pattern1 + "|" + time_pattern2 + ")"
     date_pattern = date + "([ ]+" + time_pattern + ")?"
     if re.fullmatch(boolean_pattern, value.upper()):
         return value.upper() == "TRUE"
