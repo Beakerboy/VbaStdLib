@@ -8,24 +8,24 @@ def literal_from_string(value: str) -> Any:
     Create a VBA literal type from a string.
     """
     boolean_pattern = "TRUE|FALSE"
-    hex_pattern = "&H[\dA-F]+"
+    hex_pattern = r"&H[\dA-F]+"
     oct_pattern = "&[Oo]?[0-7]+"
-    dec_pattern = "\d+"
+    dec_pattern = r"\d+"
     date_pattern = "##"
-    exp = "[DEde][+-]?\d\d*"
-    float_pattern1 = "\.\d\d*(" + exp + ")?"
-    float_pattern2 = "\d\d*" + exp
-    float_pattern3 = "\d\d*\.(\d\d*)?(" + exp + ")?"
+    exp = r"[DEde][+-]?\d\d*"
+    float_pattern1 = r"\.\d\d*(" + exp + ")?"
+    float_pattern2 = r"\d\d*" + exp
+    float_pattern3 = r"\d\d*\.(\d\d*)?(" + exp + ")?"
 
     # Date Literal
     sep = "([ ]+|([]*[/-][]*))"
     eng_month = "(JANUARY|FEBRUARY|MARCH|APRIL|MAY|JUNE|JULY|AUGUST|SEPTEMBER|OCTOBER|NOVEMBER|DECEMBER)"
     month_abv = "(JAN|FEB|MAR|APR|JUN|JUL|AUG|SEP|OCT|NOV|DEC)"
     month_name = "(eng_month|month_abv)"
-    date_val_part = "(\d+|" + month_name + ")"
+    date_val_part = r"(\d+|" + month_name + ")"
     date = date_val_part + sep + date_val_part + "(" + sep + date_val_part + ")?"
-    time_pattern1 = "(\d+(AM|PM|A|P))"
-    time_pattern2 = "(\d+[ ]?[:.][ ]?\d+([ ]?[:.][ ]?\d+)?)"
+    time_pattern1 = r"(\d+(AM|PM|A|P))"
+    time_pattern2 = r"(\d+[ ]?[:.][ ]?\d+([ ]?[:.][ ]?\d+)?)"
     time_pattern = "(" + time_pattern1 + "|" + time_pattern2 + ")"
     date_pattern = date + "([ ]+" + time_pattern + ")?"
     if re.fullmatch(boolean_pattern, value.upper()):
