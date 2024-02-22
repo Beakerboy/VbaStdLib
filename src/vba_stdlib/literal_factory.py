@@ -15,16 +15,16 @@ def literal_from_string(value: str) -> Any:
     float_pattern1 = "\.\d\d*(" + exp + ")?"
     float_pattern2 = "\d\d*" + exp
     float_pattern3 = "\d\d" + float_pattern1
-    if re.search(boolean_pattern, value.upper()):
+    if re.fullmatch(boolean_pattern, value.upper()):
         return value.upper() == "TRUE"
-    if re.search(hex_pattern, value):
+    if re.fullmatch(hex_pattern, value):
         return int("0x" + value[2:])
-    if re.search(oct_pattern, value):
+    if re.fullmatch(oct_pattern, value):
         start = 2 if value[1].upper() == 'O' else 1
         return int(value[start:], 8)
-    if re.search(dec_pattern, value):
+    if re.fullmatch(dec_pattern, value):
         return int(value)
-    if (re.search(float_pattern1, value) or
-            re.search(float_pattern2, value) or
-            re.search(float_pattern3, value)):
+    if (re.fullmatch(float_pattern1, value) or
+            re.fullmatch(float_pattern2, value) or
+            re.fullmatch(float_pattern3, value)):
         return float(value)
