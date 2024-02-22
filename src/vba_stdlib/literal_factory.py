@@ -9,6 +9,11 @@ def literal_from_string(value: str) -> Any:
     hex_pattern = "&H[0-9A-F]+"
     oct_pattern = "&[Oo]?[0-7]+"
     dec_pattern = "[0-9]+"
+    date_pattern = "##"
+    exp = "[DEde][+-]?\d\d*"
+    float_pattern1 = "\.\d\d*(" + exp + ")?"
+    float_pattern2 = "\d\d*" + exp
+    float_pattern3 = "\d\d" + float_pattern1
     if re.search(boolean_pattern, value.upper()):
         return value.upper() == "TRUE"
     if re.search(hex_pattern, value):
@@ -18,3 +23,7 @@ def literal_from_string(value: str) -> Any:
         return int(value[start:], 8)
     if re.search(dec_pattern, value):
         return int(value)
+    if (re.search(float_pattern1, value) or
+            re.search(float_pattern2, value) or
+            re.search(float_pattern3, value)):
+        return float(value)
