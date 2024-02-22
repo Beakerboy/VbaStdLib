@@ -35,7 +35,10 @@ tests = [
 [project.urls]
 "Homepage" = "https://github.com/Beakerboy/VBA-Linter"
 "Bug Tracker" = "https://github.com/Beakerboy/VBA-Linter/issues"
-    
+
+[tool.setuptools.package-data]
+"vba_stdlib" = ["py.typed"]
+
 [tool.pytest.ini_options]
 pythonpath = "src:tests"
 testpaths = [
