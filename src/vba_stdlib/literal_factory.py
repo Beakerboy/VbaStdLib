@@ -28,5 +28,5 @@ def literal_from_string(value: str) -> Any:
             re.fullmatch(float_pattern2, value) or
             re.fullmatch(float_pattern3, value)):
         return float(value)
-    if value[-1:1] == '""':
+    if value[-1] == '"' and value[0] == '"':
         return value[1:-1]
