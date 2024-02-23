@@ -1,4 +1,4 @@
-import datetime
+from datetime import datetime
 from vba_stdlib.literal_factory import literal_from_string
 
 
