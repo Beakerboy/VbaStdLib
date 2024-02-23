@@ -17,7 +17,7 @@ def literal_from_string(value: str) -> Any:
     float_pattern3 = r"\d\d*\.(\d\d*)?(" + exp + ")?"
 
     # Date Literal
-    sep = "([ ]+|([]*[/-][]*))"
+    sep = "([ ]+|([ ]*[/-][ ]*))"
     eng_month = ("(JANUARY|FEBRUARY|MARCH|APRIL|MAY|JUNE" +
                  "|JULY|AUGUST|SEPTEMBER|OCTOBER|NOVEMBER|DECEMBER)")
     month_abv = "(JAN|FEB|MAR|APR|JUN|JUL|AUG|SEP|OCT|NOV|DEC)"
