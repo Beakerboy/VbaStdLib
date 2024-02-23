@@ -18,10 +18,10 @@ def literal_from_string(value: str) -> Any:
 
     # Date Literal
     sep = "([ ]+|([ ]*[/-][ ]*))"
-    eng_month = ("(JANUARY|FEBRUARY|MARCH|APRIL|MAY|JUNE" +
-                 "|JULY|AUGUST|SEPTEMBER|OCTOBER|NOVEMBER|DECEMBER)")
-    month_abv = "(JAN|FEB|MAR|APR|JUN|JUL|AUG|SEP|OCT|NOV|DEC)"
-    month_name = "(" + eng_month + "|" + month_abv + ")"
+    eng_month = ("JANUARY|FEBRUARY|MARCH|APRIL|MAY|JUNE" +
+                 "|JULY|AUGUST|SEPTEMBER|OCTOBER|NOVEMBER|DECEMBER")
+    month_abv = "JAN|FEB|MAR|APR|JUN|JUL|AUG|SEP|OCT|NOV|DEC"
+    month_name = eng_month + "|" + month_abv
     date_val_part = r"(\d+|" + month_name + ")"
     date = (date_val_part + sep + date_val_part +
             "(" + sep + date_val_part + ")?")
