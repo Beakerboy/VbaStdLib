@@ -22,3 +22,8 @@ def test_float() -> None:
     assert literal_from_string("10.") == 10.0
     assert literal_from_string("3.14") == 3.14
     assert literal_from_string(".5") == .5
+
+
+def test_string() -> None:
+    assert literal_from_string("foo") == "foo"
+    
