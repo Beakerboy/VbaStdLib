@@ -1,3 +1,4 @@
+import datetime
 from vba_stdlib.literal_factory import literal_from_string
 
 
@@ -26,3 +27,10 @@ def test_float() -> None:
 
 def test_string() -> None:
     assert literal_from_string('"foo"') == "foo"
+
+
+def test_date() -> None:
+    expected = datetime(2000, 1, 1)
+    result = literal_from_string("#Jan 01 2000#")
+    assert  result == expected
+                               
