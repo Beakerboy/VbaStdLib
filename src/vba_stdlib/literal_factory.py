@@ -11,7 +11,6 @@ def literal_from_string(value: str) -> Any:
     hex_pattern = r"&H[\dA-F]+"
     oct_pattern = "&[Oo]?[0-7]+"
     dec_pattern = r"\d+"
-    date_pattern = "##"
     exp = r"[DEde][+-]?\d\d*"
     float_pattern1 = r"\.\d\d*(" + exp + ")?"
     float_pattern2 = r"\d\d*" + exp
@@ -46,7 +45,7 @@ def literal_from_string(value: str) -> Any:
     if value[-1] == '"' and value[0] == '"':
         return value[1:-1]
     raise Exception(date_pattern)
-    if (re.fullmatch("#" + date_pattern + "#", value) or
+    if (re.fullmatch("#" + date + "#", value) or
             re.fullmatch("#" + time_pattern + "#", value)):
         return parse(value[1:-1])
     # assume non-quoted string.
