@@ -44,7 +44,7 @@ def literal_from_string(value: str) -> Any:
         return float(value)
     if value[-1] == '"' and value[0] == '"':
         return value[1:-1]
-    if re.fullmatch("#" + date + "#", value):
+    if re.fullmatch("#" + date + "#", value.upper()):
         return parse(value[1:-1])
     # assume non-quoted string.
     return value
