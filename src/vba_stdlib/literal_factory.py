@@ -25,10 +25,10 @@ def literal_from_string(value: str) -> Any:
     date_val_part = r"(\d+|" + month_name + ")"
     date = (date_val_part + sep + date_val_part +
             "(" + sep + date_val_part + ")?")
-    time_pattern1 = r"(\d+(AM|PM|A|P))"
-    time_pattern2 = r"(\d+[ ]?[:.][ ]?\d+([ ]?[:.][ ]?\d+)?)"
-    time_pattern = "(" + time_pattern1 + "|" + time_pattern2 + ")"
-    date_pattern = date + "([ ]+" + time_pattern + ")?"
+    # time_pattern1 = r"(\d+(AM|PM|A|P))"
+    # time_pattern2 = r"(\d+[ ]?[:.][ ]?\d+([ ]?[:.][ ]?\d+)?)"
+    # time_pattern = "(" + time_pattern1 + "|" + time_pattern2 + ")"
+    # date_pattern = date + "([ ]+" + time_pattern + ")?"
     if re.fullmatch(boolean_pattern, value.upper()):
         return value.upper() == "TRUE"
     if re.fullmatch(hex_pattern, value):
@@ -44,8 +44,7 @@ def literal_from_string(value: str) -> Any:
         return float(value)
     if value[-1] == '"' and value[0] == '"':
         return value[1:-1]
-    if (re.fullmatch("#" + date + "#", value) or
-            re.fullmatch("#" + time_pattern + "#", value)):
+    if re.fullmatch("#" + date + "#", value):
         return parse(value[1:-1])
     # assume non-quoted string.
     return value
