@@ -32,5 +32,4 @@ def test_string() -> None:
 def test_date() -> None:
     expected = datetime(2000, 1, 1)
     result = literal_from_string("#Jan 01 2000#")
-    assert  result == expected
-                               
+    assert result == expected                    
