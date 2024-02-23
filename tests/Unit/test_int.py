@@ -26,4 +26,3 @@ def test_float() -> None:
 
 def test_string() -> None:
     assert literal_from_string('"foo"') == "foo"
-    
