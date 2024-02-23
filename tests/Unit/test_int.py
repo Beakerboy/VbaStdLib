@@ -3,8 +3,8 @@ from vba_stdlib.literal_factory import literal_from_string
 
 def test_boolean() -> None:
     assert literal_from_string("true")
-    assert literal_from_string("False") == False
-    
+    assert not literal_from_string("False")
+
 
 def test_decimal() -> None:
     assert literal_from_string("10") == 10
