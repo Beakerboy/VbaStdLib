@@ -45,6 +45,7 @@ def literal_from_string(value: str) -> Any:
         return float(value)
     if value[-1] == '"' and value[0] == '"':
         return value[1:-1]
+    raise Exception(date_pattern)
     if (re.fullmatch("#" + date_pattern + "#", value) or
             re.fullmatch("#" + time_pattern + "#", value)):
         return parse(value[1:-1])
