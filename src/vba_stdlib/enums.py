@@ -14,6 +14,13 @@ class VbAppWinStyle(Enum):
     vbNormalFocus = 1
     vbNormalNoFocus = 4
 
+class VbCallType(Enum):
+    # 6.1.1.4 VbCallType
+    vbGet = 2
+    vbLet = 4
+    vbMethod = 1
+    vbSet = 8
+
 class VbDayOfWeek(Enum):
     # 6.1.1.7 VbDayOfWeek
     vbsunday = 1
