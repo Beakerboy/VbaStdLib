@@ -17,7 +17,12 @@ class Interaction:
         pass
 
     @staticmethod
-    def MsgBox(prompt: Any, buttons, title, help_file, context) -> VbMsgBoxResult:
+    def MsgBox(prompt: Any,
+               buttons = vbOkOnly,
+               title: str = "",
+               help_file: str = "",
+               context: int | None = None
+              ) -> VbMsgBoxResult:
         print(prompt)
         return VbMsgBoxResult.vbOK
 
