@@ -23,7 +23,7 @@ class Interaction:
                help_file: str = "",
                context: int | None = None
               ) -> VbMsgBoxResult:
-        print(prompt)
+        print(str(prompt))
         return VbMsgBoxResult.vbOK
 
     @staticmethod
