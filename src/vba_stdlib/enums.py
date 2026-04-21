@@ -42,6 +42,10 @@ class VbMsgBoxResult(Enum):
     vbRetry = 4
     vbYes = 6
 
+class VBMsgBoxStyle(Enum):
+    # 6.1.1.12 VbMsgBoxStyle
+    vbOKOnly = 0
+
 class VbVarType(Enum):
     # 6.1.1.16 VbVarType
     vbArray = 8192
