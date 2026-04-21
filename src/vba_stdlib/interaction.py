@@ -1,5 +1,5 @@
 from typing import Any
-from vba_stdlib.enums import VbCallType, VbMsgBoxResult
+from vba_stdlib.enums import VbCallType, VbMsgBoxResult, VbMsgBoxStyle
 
 
 class Interaction:
@@ -18,7 +18,7 @@ class Interaction:
 
     @staticmethod
     def MsgBox(prompt: Any,
-               buttons = vbOkOnly,
+               buttons: VbMsgBoxStyle = VbMsgBoxStyle.vbOkOnly,
                title: str = "",
                help_file: str = "",
                context: int | None = None
