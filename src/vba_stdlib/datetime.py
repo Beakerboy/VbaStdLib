@@ -18,7 +18,7 @@ def dateserial():
 
 
 def datevalue():
-    pas
+    pass
 
 def day():
     pass
