@@ -5,9 +5,9 @@ from vba_stdlib.Types.null import Null
 class Math:
 
     def abs(number: Any) -> Any:
-        if isinstance(number, Null)
+        if isinstance(number, Null):
             return number
-        if isinstance(number, Empty)
+        if isinstance(number, Empty):
             return 0
         return abs(number)
 
