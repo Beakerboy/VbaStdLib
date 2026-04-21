@@ -42,7 +42,7 @@ class VbMsgBoxResult(Enum):
     vbRetry = 4
     vbYes = 6
 
-class VBMsgBoxStyle(Enum):
+class VbMsgBoxStyle(Enum):
     # 6.1.1.12 VbMsgBoxStyle
     vbOKOnly = 0
 
