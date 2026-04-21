@@ -6,7 +6,7 @@ from typing import Any, TypeVar
 class Math:
 
     @staticmethod
-    def abs(number: Any) -> Any:
+    def abs(number: Any) -> float:
         if isinstance(number, Null):
             return number
         if isinstance(number, Empty):
@@ -14,43 +14,43 @@ class Math:
         return abs(number)
 
     @staticmethod
-    def atn(number: Any) -> number:
+    def atn(number: Any) -> float:
         pass
 
     @staticmethod
-    def cos(number: Any) -> number:
+    def cos(number: Any) -> float:
         pass
     
     @staticmethod
-    def exp(number: Any) -> number:
+    def exp(number: Any) -> float:
         pass
 
     @staticmethod
-    def log(number: Any) -> number:
+    def log(number: Any) -> float:
         pass
 
     @staticmethod
-    def rnd(number: Any) -> number:
+    def rnd(number: Any) -> float:
         pass
 
     @staticmethod
-    def round(number: Any) -> number:
+    def round(number: Any) -> float:
         pass
 
     @staticmethod
-    def sgn(number: Any) -> number:
+    def sgn(number: Any) -> float:
         pass
 
     @staticmethod
-    def sin(number: Any) -> number:
+    def sin(number: Any) -> float:
         pass
 
     @staticmethod
-    def Sqr(number: Any) -> number:
+    def Sqr(number: Any) -> float:
         pass
 
     @staticmethod
-    def tan(number: Any) -> number:
+    def tan(number: Any) -> float:
         pass
 
     @staticmethod
