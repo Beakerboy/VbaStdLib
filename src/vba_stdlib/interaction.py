@@ -13,7 +13,7 @@ class Interaction:
         pass
 
     @staticmethod
-    def CreateObject() -> Object:
+    def CreateObject() -> object:
         pass
 
     @staticmethod
