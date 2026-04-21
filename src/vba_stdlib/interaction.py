@@ -18,7 +18,7 @@ class Interaction:
 
     @staticmethod
     def MsgBox(prompt: Any,
-               buttons: VbMsgBoxStyle = VbMsgBoxStyle.vbOkOnly,
+               buttons: VbMsgBoxStyle = VbMsgBoxStyle.vbOKOnly,
                title: str = "",
                help_file: str = "",
                context: int | None = None
