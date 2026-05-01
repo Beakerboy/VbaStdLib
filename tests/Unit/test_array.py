@@ -1,4 +1,4 @@
-from vba_stdlib.types.array import Array
+from vba_stdlib.Types.array import Array
 
 
 
