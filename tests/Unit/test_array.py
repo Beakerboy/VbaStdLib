@@ -1,3 +1,6 @@
+from vba_stdlib.types.array import Array
+
+
 
 # Usage Example
 Array.base = 1
