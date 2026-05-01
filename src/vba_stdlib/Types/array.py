@@ -1,9 +1,14 @@
 import itertools
+from typing import TypeVar
+
+
+T = TypeVar('T', bound='Array')
+
 
 class Array:
     base = 0  # Global setting mimicking 'Option Base'
 
-    def __init__(self, *bounds):
+    def __init__(self: T, *bounds) -> None:
         """
         Initializes an N-dimensional array.
         Examples:
@@ -23,12 +28,12 @@ class Array:
         self._shape = tuple(shape)
         self._data = self._build_nested_lists(self._shape)
 
-    def _build_nested_lists(self, shape):
+    def _build_nested_lists(self: T, shape):
         if len(shape) == 1:
             return [None] * shape[0]
         return [self._build_nested_lists(shape[1:]) for _ in range(shape[0])]
 
-    def _resolve_indices(self, keys):
+    def _resolve_indices(self: T, keys):
         indices = keys if isinstance(keys, tuple) else (keys,)
         if len(indices) != len(self._bounds):
             raise IndexError("Wrong number of dimensions")
@@ -41,20 +46,20 @@ class Array:
             internal_indices.append(val - l)
         return internal_indices
 
-    def __getitem__(self, keys):
+    def __getitem__(self: T, keys):
         target = self._data
         for idx in self._resolve_indices(keys):
             target = target[idx]
         return target
 
-    def __setitem__(self, keys, value):
+    def __setitem__(self: T, keys, value):
         indices = self._resolve_indices(keys)
         target = self._data
         for idx in indices[:-1]:
             target = target[idx]
         target[indices[-1]] = value
 
-    def redim(self, *new_bounds, preserve=False):
+    def redim(self: T, *new_bounds, preserve=False):
         """
         Resizes the array. 
         If preserve=True, only the upper bound of the last dimension can change.
@@ -91,16 +96,6 @@ class Array:
             except IndexError:
                 continue # Truncated during resize
 
-    def __repr__(self):
+    def __repr__(self: T):
         bound_strings = [f"{l} To {u}" for l, u in self._bounds]
         return f"Array({', '.join(bound_strings)})"
-
-# Usage Example
-Array.base = 1
-my_arr = Array((1, 3), (6, 9))
-my_arr[1, 6] = "Top Left"
-my_arr[3, 9] = "Bottom Right"
-
-# ReDim Preserve my_arr(1 To 3, 6 To 12)
-my_arr.redim((1, 3), (6, 12), preserve=True)
-print(my_arr[1, 6]) # Output: Top Left
