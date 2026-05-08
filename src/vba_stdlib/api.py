@@ -1,3 +1,6 @@
+from vba_stdlib.interaction import Interaction
+
+
 api = {
     "name": "vba",
     "modules": {
