@@ -12,8 +12,11 @@ class VBAArray:
             input = [empty] * (len(data) + 1)
             return cls(*input)
         elif len(data) == 1:
-            input = [empty] * (data[1] - data[0] + 1)
-            return cls(*input, base=data[0])
+            arr = cls.__new__(cls)
+            arr._bounds = list(args)
+            shape = tuple(max_idx - min_idx + 1 for min_idx, max_idx in arr._bounds)
+            arr._data = arr._recursive_init(shape)
+            return arr
 
     def _recursive_init(self, shape: Tuple[int, ...]) -> Any:
         if len(shape) == 1:
