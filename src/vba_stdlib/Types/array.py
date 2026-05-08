@@ -1,7 +1,11 @@
-from typing import Any, Tuple, Union, List
+from typing import Any, Tuple, TypeVar, Union, List
+
+
+T = TypeVar('T', bound='VBAArray')
+
 
 class VBAArray:
-    def __init__(self, *args: Any, base: int = 0):
+    def __init__(self: T, *args: Any, base: int = 0):
         self._data = list(args)
         self._bounds = [(base, base + len(args) - 1)]
 
@@ -18,12 +22,12 @@ class VBAArray:
             arr._data = arr._recursive_init(shape)
             return arr
 
-    def _recursive_init(self, shape: Tuple[int, ...]) -> Any:
+    def _recursive_init(self: T, shape: Tuple[int, ...]) -> Any:
         if len(shape) == 1:
             return [None] * shape[0]
         return [self._recursive_init(shape[1:]) for _ in range(shape[0])]
 
-    def _get_coords(self, indices: Tuple[int, ...]) -> Tuple[int, ...]:
+    def _get_coords(self: T, indices: Tuple[int, ...]) -> Tuple[int, ...]:
         if len(indices) != len(self._bounds):
             raise IndexError("Subscript out of range (dimension mismatch)")
         
@@ -35,7 +39,7 @@ class VBAArray:
             internal.append(idx - low)
         return tuple(internal)
 
-    def __getitem__(self, key: Union[int, Tuple[int, ...]]) -> Any:
+    def __getitem__(self: T, key: Union[int, Tuple[int, ...]]) -> Any:
         indices = key if isinstance(key, tuple) else (key,)
         coords = self._get_coords(indices)
         val = self._data
@@ -43,7 +47,7 @@ class VBAArray:
             val = val[c]
         return val
 
-    def __setitem__(self, key: Union[int, Tuple[int, ...]], value: Any) -> None:
+    def __setitem__(self: T, key: Union[int, Tuple[int, ...]], value: Any) -> None:
         indices = key if isinstance(key, tuple) else (key,)
         coords = self._get_coords(indices)
         target = self._data
@@ -51,11 +55,11 @@ class VBAArray:
             target = target[c]
         target[coords[-1]] = value
 
-    def lbound(self, dimension: int = 1) -> int:
+    def lbound(self: T, dimension: int = 1) -> int:
         return self._bounds[dimension - 1][0]
 
-    def ubound(self, dimension: int = 1) -> int:
+    def ubound(self: T, dimension: int = 1) -> int:
         return self._bounds[dimension - 1][1]
 
-    def __repr__(self) -> str:
+    def __repr__(self: T) -> str:
         return f"<VBAArray: Bounds {self._bounds}>"
