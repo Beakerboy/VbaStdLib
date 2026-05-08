@@ -70,13 +70,13 @@ def test_out_of_bounds_raises_error():
 
 def test_dimension_mismatch():
     """Ensures accessing a 2D array with 1D index (or vice versa) fails."""
-    arr_2d = VBAArray((1, 2), (1, 2))
+    arr_2d = VBAArray.initialize((1, 2), (1, 2))
     
     with pytest.raises(IndexError, match="dimension mismatch"):
         _ = arr_2d[1]  # Missing second dimension
 
 def test_assignment_updates_value():
     """Verifies that __setitem__ actually modifies the internal data."""
-    arr = VBAArray(None, None, base=0)
+    arr = VBAArray(None, None)
     arr[0] = "Modified"
     assert arr[0] == "Modified"
