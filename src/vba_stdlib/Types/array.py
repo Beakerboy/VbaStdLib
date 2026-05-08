@@ -58,5 +58,3 @@ class VBAArray:
 
     def __repr__(self) -> str:
         return f"<VBAArray: Bounds {self._bounds}>"
-style!
-print(arr2.ubound(2))      # 6
