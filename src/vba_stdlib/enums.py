@@ -14,12 +14,23 @@ class VbAppWinStyle(Enum):
     vbNormalFocus = 1
     vbNormalNoFocus = 4
 
+
+# 6.1.1.3
+
+
 class VbCallType(Enum):
     # 6.1.1.4 VbCallType
     vbGet = 2
     vbLet = 4
     vbMethod = 1
     vbSet = 8
+
+
+# 6.1.1.5
+
+
+# 6.1.1.6
+
 
 class VbDayOfWeek(Enum):
     # 6.1.1.7 VbDayOfWeek
@@ -32,6 +43,16 @@ class VbDayOfWeek(Enum):
     vbSaturday = 7
     vbUseSystemDayOfWeek = 0
 
+
+# 6.1.1.8
+
+
+# 6.1.1.9
+
+
+# 6.1.1.10
+
+
 class VbMsgBoxResult(Enum):
     # 6.1.1.11 VbMsgBoxResult
     vbAbort = 3
@@ -42,9 +63,20 @@ class VbMsgBoxResult(Enum):
     vbRetry = 4
     vbYes = 6
 
+
 class VbMsgBoxStyle(Enum):
     # 6.1.1.12 VbMsgBoxStyle
     vbOKOnly = 0
+
+
+# 6.1.1.13
+
+
+# 6.1.1.14
+
+
+# 6.1.1.15
+
 
 class VbVarType(Enum):
     # 6.1.1.16 VbVarType
