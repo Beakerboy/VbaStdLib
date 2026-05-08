@@ -1,5 +1,5 @@
 import pytest
-from vba_integer import VBAInteger  # Assuming your class is in vba_integer.py
+from vba_stdlib.Types.integer import VbaInteger
 
 def test_initialization_boundaries():
     """Test that valid boundaries work and invalid ones raise OverflowError."""
