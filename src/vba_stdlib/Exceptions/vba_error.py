@@ -37,3 +37,12 @@ class ArrayLockedError(VBAError):
     """Error 10: Occurs when attempting to ReDim a locked array."""
     def __init__(self: T) -> None:
         super().__init__(10, "This array is fixed or temporarily locked")
+
+
+T = TypeVar('T', bound='DivisionByZero')
+
+
+class DivisionByZero(VBAError):
+    """Error 10: Occurs when attempting to ReDim a locked array."""
+    def __init__(self: T) -> None:
+        super().__init__(11, "Division by zero")
