@@ -4,7 +4,7 @@ from typing import TypeVar
 T = TypeVar('T', bound='VBAError')
 
 
-class VBAError(Exception):
+class VBAError(Exception) -> None:
     """Base class for VBA-style errors."""
     def __init__(self: T, number: int, message: str):
         self.number = number
@@ -15,7 +15,7 @@ class VBAError(Exception):
 T = TypeVar('T', bound='SubscriptOutOfRange')
 
 
-class SubscriptOutOfRange(VBAError):
+class SubscriptOutOfRange(VBAError) -> None:
     """Error 9: Occurs when an index is outside array bounds."""
     def __init__(self: T):
         super().__init__(9, "Subscript out of range")
@@ -24,7 +24,7 @@ class SubscriptOutOfRange(VBAError):
 T = TypeVar('T', bound='ArrayLockedError')
 
 
-class ArrayLockedError(VBAError):
+class ArrayLockedError(VBAError) -> None:
     """Error 10: Occurs when attempting to ReDim a locked array."""
     def __init__(self: T):
         super().__init__(10, "This array is fixed or temporarily locked")
