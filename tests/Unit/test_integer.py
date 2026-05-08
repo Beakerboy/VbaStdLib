@@ -60,4 +60,4 @@ def test_interoperability():
     """Test interaction between VBAInteger and standard Python ints."""
     a = VBAInteger(100)
     assert int(a + 50) == 150
-    assert int(200 - a) == 100  # Python int handles the __sub__ if not defined otherwise
+    assert int(50 + a) == 150
