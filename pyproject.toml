@@ -35,8 +35,8 @@ tests = [
   'types-python-dateutil',
 ]
 [project.urls]
-"Homepage" = "https://github.com/Beakerboy/VBA-Linter"
-"Bug Tracker" = "https://github.com/Beakerboy/VBA-Linter/issues"
+"Homepage" = "https://github.com/Beakerboy/VbaStdLib"
+"Bug Tracker" = "https://github.com/Beakerboy/VbaStdLib/issues"
 
 [tool.setuptools.package-data]
 "vba_stdlib" = ["py.typed"]
