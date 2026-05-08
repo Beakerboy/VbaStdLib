@@ -4,7 +4,7 @@ from vba_stdlib.Types.array import VBAArray
 
 def test_base_0_initialization():
     """Tests standard comma-separated initialization with default Base 0."""
-    arr = VBAArray("apple", "banana", "cherry", base=0)
+    arr = VBAArray("apple", "banana", "cherry")
     assert arr[0] == "apple"
     assert arr[1] == "banana"
     assert arr[2] == "cherry"
@@ -13,7 +13,7 @@ def test_base_0_initialization():
 
 def test_base_1_initialization():
     """Tests comma-separated initialization with explicit Base 1."""
-    arr = VBAArray(100, 200, 300)
+    arr = VBAArray(100, 200, 300, base=1)
     assert arr[1] == 100
     assert arr[2] == 200
     assert arr[3] == 300
