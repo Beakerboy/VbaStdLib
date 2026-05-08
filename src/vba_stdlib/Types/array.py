@@ -1,101 +1,101 @@
-import itertools
-from typing import TypeVar
+from typing import List, Tuple, Any, Union, Optional
 
+class VBAArray:
+    def __init__(self, bounds: List[Tuple[int, int]], data: List[Any]):
+        self._bounds: List[Tuple[int, int]] = bounds
+        self._data: List[Any] = data
 
-T = TypeVar('T', bound='Array')
+    @classmethod
+    def from_list(cls, source_list: Union[List[Any], Tuple[Any, ...]]) -> 'VBAArray':
+        """Emulates VBA: arr = Array(1, 2, 3)"""
+        bounds = [(0, len(source_list) - 1)]
+        return cls(bounds, list(source_list))
 
-
-class Array:
-    base = 0  # Global setting mimicking 'Option Base'
-
-    def __init__(self: T, *bounds) -> None:
-        """
-        Initializes an N-dimensional array.
-        Examples:
-            Array(10) -> Dim A(base To 10)
-            Array((1, 3), (6, 9)) -> Dim A(1 To 3, 6 To 9)
-        """
-        self._bounds = []
-        shape = []
+    @classmethod
+    def with_bounds(cls, *bounds_args: int) -> 'VBAArray':
+        """Emulates VBA: Dim arr(1 To 4, 5 To 9)"""
+        if len(bounds_args) % 2 != 0:
+            raise ValueError("Bounds must be provided as pairs (lower, upper).")
         
-        for b in bounds:
-            l, u = b if isinstance(b, tuple) else (Array.base, b)
-            if l > u:
-                raise ValueError(f"LBound ({l}) cannot be greater than UBound ({u})")
-            self._bounds.append((l, u))
-            shape.append(u - l + 1)
-        
-        self._shape = tuple(shape)
-        self._data = self._build_nested_lists(self._shape)
-
-    def _build_nested_lists(self: T, shape):
-        if len(shape) == 1:
-            return [None] * shape[0]
-        return [self._build_nested_lists(shape[1:]) for _ in range(shape[0])]
-
-    def _resolve_indices(self: T, keys):
-        indices = keys if isinstance(keys, tuple) else (keys,)
-        if len(indices) != len(self._bounds):
-            raise IndexError("Wrong number of dimensions")
+        bounds: List[Tuple[int, int]] = []
+        shape: List[int] = []
+        for i in range(0, len(bounds_args), 2):
+            lower, upper = bounds_args[i], bounds_args[i+1]
+            bounds.append((lower, upper))
+            shape.append(upper - lower + 1)
             
-        internal_indices = []
-        for i, val in enumerate(indices):
-            l, u = self._bounds[i]
-            if not (l <= val <= u):
-                raise IndexError(f"Subscript out of range: Dim {i+1}")
-            internal_indices.append(val - l)
-        return internal_indices
+        def create_data(dims: List[int]) -> List[Any]:
+            if len(dims) == 1:
+                return [None] * dims[0]
+            return [create_data(dims[1:]) for _ in range(dims[0])]
+            
+        return cls(bounds, create_data(shape))
 
-    def __getitem__(self: T, keys):
-        target = self._data
-        for idx in self._resolve_indices(keys):
-            target = target[idx]
-        return target
+    def _get_internal_indices(self, keys: Union[int, Tuple[int, ...]]) -> List[int]:
+        key_tuple = keys if isinstance(keys, tuple) else (keys,)
+        
+        if len(key_tuple) != len(self._bounds):
+            raise IndexError("Subscript out of range: Dimension mismatch.")
+        
+        indices = []
+        for i, key in enumerate(key_tuple):
+            lower, upper = self._bounds[i]
+            if not (lower <= key <= upper):
+                raise IndexError(f"Subscript out of range: {key}")
+            indices.append(key - lower)
+        return indices
 
-    def __setitem__(self: T, keys, value):
-        indices = self._resolve_indices(keys)
+    def __getitem__(self, keys: Union[int, Tuple[int, ...]]) -> Any:
+        indices = self._get_internal_indices(keys)
+        item = self._data
+        for idx in indices:
+            item = item[idx]
+        return item
+
+    def __setitem__(self, keys: Union[int, Tuple[int, ...]], value: Any) -> None:
+        indices = self._get_internal_indices(keys)
         target = self._data
         for idx in indices[:-1]:
             target = target[idx]
         target[indices[-1]] = value
 
-    def redim(self: T, *new_bounds, preserve=False):
-        """
-        Resizes the array. 
-        If preserve=True, only the upper bound of the last dimension can change.
-        """
-        if not preserve:
-            self.__init__(*new_bounds)
-            return
+    def LBound(self, dimension: int = 1) -> int:
+        return self._bounds[dimension - 1][0]
 
-        # VBA ReDim Preserve validation
-        if len(new_bounds) != len(self._bounds):
-            raise ValueError("Cannot change number of dimensions with Preserve")
+    def UBound(self, dimension: int = 1) -> int:
+        return self._bounds[dimension - 1][1]
+
+    def ReDimPreserve(self, *new_bounds: int) -> None:
+        """Only the last dimension's upper bound can change."""
+        new_b = [(new_bounds[i], new_bounds[i+1]) for i in range(0, len(new_bounds), 2)]
         
-        for i in range(len(new_bounds) - 1):
-            old_l, old_u = self._bounds[i]
-            new_l, new_u = new_bounds[i] if isinstance(new_bounds[i], tuple) else (Array.base, new_bounds[i])
-            if (old_l, old_u) != (new_l, new_u):
-                raise ValueError("Preserve only allows changing the last dimension's upper bound")
+        if len(new_b) != len(self._bounds):
+            raise ValueError("Cannot change dimensions with ReDim Preserve.")
+        
+        for i in range(len(new_b) - 1):
+            if new_b[i] != self._bounds[i]:
+                raise ValueError("Only the last dimension can be modified.")
+        
+        if new_b[-1][0] != self._bounds[-1][0]:
+            raise ValueError("Cannot change the lower bound with ReDim Preserve.")
 
-        # Capture old data before re-initializing
-        old_data_map = {
-            indices: self[tuple(l + i for l, i in zip([b[0] for b in self._bounds], indices))]
-            for indices in itertools.product(*(range(s) for s in self._shape))
-        }
+        new_upper = new_b[-1][1]
+        new_size = new_upper - new_b[-1][0] + 1
+        
+        def resize_recursive(data: List[Any], depth: int) -> None:
+            if depth < len(self._bounds) - 1:
+                for sublist in data:
+                    resize_recursive(sublist, depth + 1)
+            else:
+                current_size = len(data)
+                if new_size > current_size:
+                    data.extend([None] * (new_size - current_size))
+                else:
+                    del data[new_size:]
 
-        # Apply new bounds
-        self.__init__(*new_bounds)
+        resize_recursive(self._data, 0)
+        self._bounds[-1] = (self._bounds[-1][0], new_upper)
 
-        # Restore data that fits in new structure
-        for rel_indices, value in old_data_map.items():
-            try:
-                # Map relative 0-based indices to new absolute indices
-                abs_indices = tuple(l + i for (l, u), i in zip(self._bounds, rel_indices))
-                self[abs_indices] = value
-            except IndexError:
-                continue # Truncated during resize
-
-    def __repr__(self: T):
-        bound_strings = [f"{l} To {u}" for l, u in self._bounds]
-        return f"Array({', '.join(bound_strings)})"
+    def __repr__(self) -> str:
+        b_str = ", ".join([f"{b[0]} To {b[1]}" for b in self._bounds])
+        return f"VBAArray({b_str})"
