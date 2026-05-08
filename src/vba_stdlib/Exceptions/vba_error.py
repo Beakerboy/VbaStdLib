@@ -6,7 +6,7 @@ T = TypeVar('T', bound='VBAError')
 
 class VBAError(Exception):
     """Base class for VBA-style errors."""
-    def __init__(self: T, number, message):
+    def __init__(self: T, number: int, message: str):
         self.number = number
         self.message = f"Run-time error '{number}': {message}"
         super().__init__(self.message)
