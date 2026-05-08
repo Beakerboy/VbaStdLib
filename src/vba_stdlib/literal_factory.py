@@ -1,6 +1,7 @@
 import re
 from dateutil.parser import parse
 from typing import Any
+from vba_type.integer import VBAInteger
 
 
 def literal_from_string(value: str) -> Any:
