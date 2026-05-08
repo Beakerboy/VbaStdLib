@@ -1,101 +1,62 @@
-from typing import List, Tuple, Any, Union, Optional
+from typing import Any, Tuple, Union, List
 
 class VBAArray:
-    def __init__(self, bounds: List[Tuple[int, int]], data: List[Any]):
-        self._bounds: List[Tuple[int, int]] = bounds
-        self._data: List[Any] = data
-
-    @classmethod
-    def from_list(cls, source_list: Union[List[Any], Tuple[Any, ...]]) -> 'VBAArray':
-        """Emulates VBA: arr = Array(1, 2, 3)"""
-        bounds = [(0, len(source_list) - 1)]
-        return cls(bounds, list(source_list))
-
-    @classmethod
-    def with_bounds(cls, *bounds_args: int) -> 'VBAArray':
-        """Emulates VBA: Dim arr(1 To 4, 5 To 9)"""
-        if len(bounds_args) % 2 != 0:
-            raise ValueError("Bounds must be provided as pairs (lower, upper).")
-        
-        bounds: List[Tuple[int, int]] = []
-        shape: List[int] = []
-        for i in range(0, len(bounds_args), 2):
-            lower, upper = bounds_args[i], bounds_args[i+1]
-            bounds.append((lower, upper))
-            shape.append(upper - lower + 1)
+    def __init__(self, *args: Any, base: int = 0):
+        """
+        Initializes a VBA-style array.
+        - VBAArray(1, 2, 3) -> Base 0/1 list of values.
+        - VBAArray((1, 2), (1, 6)) -> 2D array with specific LBound and UBound.
+        """
+        # Case 1: Tuple definitions for dimensions (e.g., (1, 2), (1, 6))
+        if args and all(isinstance(arg, tuple) and len(arg) == 2 for arg in args):
+            self._bounds = list(args)
+            shape = tuple(max_idx - min_idx + 1 for min_idx, max_idx in self._bounds)
+            self._data = self._recursive_init(shape)
+        # Case 2: Comma separated list of values
+        else:
+            self._data = list(args)
+            self._bounds = [(base, base + len(args) - 1)]
             
-        def create_data(dims: List[int]) -> List[Any]:
-            if len(dims) == 1:
-                return [None] * dims[0]
-            return [create_data(dims[1:]) for _ in range(dims[0])]
-            
-        return cls(bounds, create_data(shape))
+    def _recursive_init(self, shape: Tuple[int, ...]) -> Any:
+        if len(shape) == 1:
+            return [None] * shape[0]
+        return [self._recursive_init(shape[1:]) for _ in range(shape[0])]
 
-    def _get_internal_indices(self, keys: Union[int, Tuple[int, ...]]) -> List[int]:
-        key_tuple = keys if isinstance(keys, tuple) else (keys,)
+    def _get_coords(self, indices: Tuple[int, ...]) -> Tuple[int, ...]:
+        if len(indices) != len(self._bounds):
+            raise IndexError("Subscript out of range (dimension mismatch)")
         
-        if len(key_tuple) != len(self._bounds):
-            raise IndexError("Subscript out of range: Dimension mismatch.")
-        
-        indices = []
-        for i, key in enumerate(key_tuple):
-            lower, upper = self._bounds[i]
-            if not (lower <= key <= upper):
-                raise IndexError(f"Subscript out of range: {key}")
-            indices.append(key - lower)
-        return indices
+        internal = []
+        for i, idx in enumerate(indices):
+            low, high = self._bounds[i]
+            if not (low <= idx <= high):
+                raise IndexError(f"Subscript out of range: {idx} (Expected {low} to {high})")
+            internal.append(idx - low)
+        return tuple(internal)
 
-    def __getitem__(self, keys: Union[int, Tuple[int, ...]]) -> Any:
-        indices = self._get_internal_indices(keys)
-        item = self._data
-        for idx in indices:
-            item = item[idx]
-        return item
+    def __getitem__(self, key: Union[int, Tuple[int, ...]]) -> Any:
+        indices = key if isinstance(key, tuple) else (key,)
+        coords = self._get_coords(indices)
+        val = self._data
+        for c in coords:
+            val = val[c]
+        return val
 
-    def __setitem__(self, keys: Union[int, Tuple[int, ...]], value: Any) -> None:
-        indices = self._get_internal_indices(keys)
+    def __setitem__(self, key: Union[int, Tuple[int, ...]], value: Any) -> None:
+        indices = key if isinstance(key, tuple) else (key,)
+        coords = self._get_coords(indices)
         target = self._data
-        for idx in indices[:-1]:
-            target = target[idx]
-        target[indices[-1]] = value
+        for c in coords[:-1]:
+            target = target[c]
+        target[coords[-1]] = value
 
-    def LBound(self, dimension: int = 1) -> int:
+    def lbound(self, dimension: int = 1) -> int:
         return self._bounds[dimension - 1][0]
 
-    def UBound(self, dimension: int = 1) -> int:
+    def ubound(self, dimension: int = 1) -> int:
         return self._bounds[dimension - 1][1]
 
-    def ReDimPreserve(self, *new_bounds: int) -> None:
-        """Only the last dimension's upper bound can change."""
-        new_b = [(new_bounds[i], new_bounds[i+1]) for i in range(0, len(new_bounds), 2)]
-        
-        if len(new_b) != len(self._bounds):
-            raise ValueError("Cannot change dimensions with ReDim Preserve.")
-        
-        for i in range(len(new_b) - 1):
-            if new_b[i] != self._bounds[i]:
-                raise ValueError("Only the last dimension can be modified.")
-        
-        if new_b[-1][0] != self._bounds[-1][0]:
-            raise ValueError("Cannot change the lower bound with ReDim Preserve.")
-
-        new_upper = new_b[-1][1]
-        new_size = new_upper - new_b[-1][0] + 1
-        
-        def resize_recursive(data: List[Any], depth: int) -> None:
-            if depth < len(self._bounds) - 1:
-                for sublist in data:
-                    resize_recursive(sublist, depth + 1)
-            else:
-                current_size = len(data)
-                if new_size > current_size:
-                    data.extend([None] * (new_size - current_size))
-                else:
-                    del data[new_size:]
-
-        resize_recursive(self._data, 0)
-        self._bounds[-1] = (self._bounds[-1][0], new_upper)
-
     def __repr__(self) -> str:
-        b_str = ", ".join([f"{b[0]} To {b[1]}" for b in self._bounds])
-        return f"VBAArray({b_str})"
+        return f"<VBAArray: Bounds {self._bounds}>"
+style!
+print(arr2.ubound(2))      # 6
