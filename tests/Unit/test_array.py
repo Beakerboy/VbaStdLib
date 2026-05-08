@@ -58,6 +58,7 @@ def test_multidimensional_custom_bounds() -> None:
     assert arr.lbound(2) == 1
     assert arr.ubound(2) == 6
 
+
 def test_out_of_bounds_raises_error() -> None:
     """Ensures that accessing indices outside the defined bounds raises IndexError."""
     arr = VBAArray(1, 2, 3, base=1)
@@ -68,12 +69,14 @@ def test_out_of_bounds_raises_error() -> None:
     with pytest.raises(IndexError, match="Subscript out of range"):
         _ = arr[4]  # Too high
 
+
 def test_dimension_mismatch() -> None:
     """Ensures accessing a 2D array with 1D index (or vice versa) fails."""
     arr_2d = VBAArray.initialize((1, 2), (1, 2))
     
     with pytest.raises(IndexError, match="dimension mismatch"):
         _ = arr_2d[1]  # Missing second dimension
+
 
 def test_assignment_updates_value() -> None:
     """Verifies that __setitem__ actually modifies the internal data."""
