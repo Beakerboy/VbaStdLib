@@ -2,7 +2,7 @@ import pytest
 from vba_stdlib.Types.array import VBAArray
 
 
-def test_base_0_initialization():
+def test_base_0_initialization() -> None:
     """Tests standard comma-separated initialization with default Base 0."""
     arr = VBAArray("apple", "banana", "cherry")
     assert arr[0] == "apple"
@@ -12,7 +12,7 @@ def test_base_0_initialization():
     assert arr.ubound() == 2
 
 
-def test_base_1_initialization():
+def test_base_1_initialization() -> None:
     """Tests comma-separated initialization with explicit Base 1."""
     arr = VBAArray(100, 200, 300, base=1)
     assert arr[1] == 100
@@ -38,7 +38,7 @@ def test_initialize_with_tuple() -> None:
     assert arr[3] is None
 
 
-def test_multidimensional_custom_bounds():
+def test_multidimensional_custom_bounds() -> None:
     """Tests Array(1 To 2, 1 To 6) style initialization."""
     # Rows: 1 to 2, Cols: 1 to 6
     arr = VBAArray.initialize((1, 2), (1, 6))
@@ -58,7 +58,7 @@ def test_multidimensional_custom_bounds():
     assert arr.lbound(2) == 1
     assert arr.ubound(2) == 6
 
-def test_out_of_bounds_raises_error():
+def test_out_of_bounds_raises_error() -> None:
     """Ensures that accessing indices outside the defined bounds raises IndexError."""
     arr = VBAArray(1, 2, 3, base=1)
     
@@ -68,14 +68,14 @@ def test_out_of_bounds_raises_error():
     with pytest.raises(IndexError, match="Subscript out of range"):
         _ = arr[4]  # Too high
 
-def test_dimension_mismatch():
+def test_dimension_mismatch() -> None:
     """Ensures accessing a 2D array with 1D index (or vice versa) fails."""
     arr_2d = VBAArray.initialize((1, 2), (1, 2))
     
     with pytest.raises(IndexError, match="dimension mismatch"):
         _ = arr_2d[1]  # Missing second dimension
 
-def test_assignment_updates_value():
+def test_assignment_updates_value() -> None:
     """Verifies that __setitem__ actually modifies the internal data."""
     arr = VBAArray(None, None)
     arr[0] = "Modified"
