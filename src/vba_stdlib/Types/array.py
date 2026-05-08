@@ -1,7 +1,7 @@
 from typing import Any, Tuple, Union, List
 
 class VBAArray:
-    def __init__(self, *args: Any, base: int = 0):
+    def __init__(self, *args: Any, base: int = 1):
         """
         Initializes a VBA-style array.
         - VBAArray(1, 2, 3) -> Base 0/1 list of values.
