@@ -12,6 +12,15 @@ class VBAError(Exception):
         super().__init__(self.message)
 
 
+T = TypeVar('T', bound='VbaOverflowError')
+
+
+class VbaOverflowError(VBAError):
+    """Error 6: Occurs when an index is outside array bounds."""
+    def __init__(self: T) -> None:
+        super().__init__(6, "Overflow Error")
+
+
 T = TypeVar('T', bound='SubscriptOutOfRange')
 
 
