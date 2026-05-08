@@ -10,7 +10,7 @@ class VBAArray:
         self._bounds = [(base, base + len(args) - 1)]
 
     @classmethod
-    def initialize(cls, *args, empty: Any = None)-> Type[T]:
+    def initialize(cls, *args: int | list[tuple], empty: Any = None)-> Type[T]:
         data = list(args)
         if len(data) == 1 and not isinstance(data[0], tuple):
             input = [empty] * (data[0] + 1)
@@ -18,7 +18,9 @@ class VBAArray:
         else:
             arr = cls.__new__(cls)
             arr._bounds = list(args)
-            shape = tuple(max_idx - min_idx + 1 for min_idx, max_idx in arr._bounds)
+            shape = tuple(
+                max_idx - min_idx + 1 for min_idx, max_idx in arr._bounds
+            )
             arr._data = arr._recursive_init(shape)
             return arr
 
@@ -47,7 +49,9 @@ class VBAArray:
             val = val[c]
         return val
 
-    def __setitem__(self: T, key: Union[int, Tuple[int, ...]], value: Any) -> None:
+    def __setitem__(self: T,
+                    key: Union[int, Tuple[int, ...]],
+                    value: Any) -> None:
         indices = key if isinstance(key, tuple) else (key,)
         coords = self._get_coords(indices)
         target = self._data
