@@ -5,10 +5,10 @@ def test_initialization_boundaries() -> None:
     """Test that valid boundaries work and invalid ones raise OverflowError."""
     assert int(VBAInteger(32767)) == 32767
     assert int(VBAInteger(-32768)) == -32768
-    
+
     with pytest.raises(OverflowError, match="Run-time error '6': Overflow"):
         VBAInteger(32768)
-        
+
     with pytest.raises(OverflowError, match="Run-time error '6': Overflow"):
         VBAInteger(-32769)
 
@@ -23,7 +23,7 @@ def test_arithmetic_overflow() -> None:
     """Test that operations resulting in out-of-bounds values raise OverflowError."""
     a = VBAInteger(30000)
     b = VBAInteger(3000)
-    
+
     with pytest.raises(OverflowError):
         _ = a + b  # 33000 > 32767
 
@@ -36,16 +36,16 @@ def test_basic_math_operations() -> None:
     """Test standard arithmetic returns correct values and types."""
     a = VBAInteger(10)
     b = VBAInteger(3)
-    
+
     # Addition
     res_add = a + b
     assert int(res_add) == 13
     assert isinstance(res_add, VBAInteger)
-    
+
     # Integer Division (VBA '\' operator)
     res_div = a // b
     assert int(res_div) == 3
-    
+
     # Multiplication
     assert int(a * b) == 30
 
