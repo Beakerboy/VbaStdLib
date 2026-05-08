@@ -9,7 +9,7 @@ class VBAArray:
     def initialize(cls, *args, empty: Any=None):
         data = list(args)
         if len(data) == 1 and not isinstance(data[0], tuple):
-            input = [empty] * (len(data) + 1)
+            input = [empty] * (data[0] + 1)
             return cls(*input)
         elif len(data) == 1:
             arr = cls.__new__(cls)
