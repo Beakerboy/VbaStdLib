@@ -1,5 +1,5 @@
 import pytest
-from vba_stdlib.Types.array import Array
+from vba_stdlib.Types.array import VBAArray
 
 
 def test_initialization_with_base():
