@@ -2,21 +2,19 @@ from typing import Any, Tuple, Union, List
 
 class VBAArray:
     def __init__(self, *args: Any, base: int = 0):
-        """
-        Initializes a VBA-style array.
-        - VBAArray(1, 2, 3) -> Base 0/1 list of values.
-        - VBAArray((1, 2), (1, 6)) -> 2D array with specific LBound and UBound.
-        """
-        # Case 1: Tuple definitions for dimensions (e.g., (1, 2), (1, 6))
-        if args and all(isinstance(arg, tuple) and len(arg) == 2 for arg in args):
-            self._bounds = list(args)
-            shape = tuple(max_idx - min_idx + 1 for min_idx, max_idx in self._bounds)
-            self._data = self._recursive_init(shape)
-        # Case 2: Comma separated list of values
-        else:
-            self._data = list(args)
-            self._bounds = [(base, base + len(args) - 1)]
-            
+        self._data = list(args)
+        self._bounds = [(base, base + len(args) - 1)]
+
+    @classmethod
+    def initialize(cls, *args, empty: Any=None):
+        data = list(args)
+        if len(data) == 1 and not isinstance(data[0], tuple):
+            input = [empty] * (len(data) + 1)
+            return cls(*input)
+        elif len(data) == 1:
+            input = [empty] * (data[1] - data[0] + 1)
+            return cls(*input, base=data[0])
+
     def _recursive_init(self, shape: Tuple[int, ...]) -> Any:
         if len(shape) == 1:
             return [None] * shape[0]
