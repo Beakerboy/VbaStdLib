@@ -40,7 +40,7 @@ class VBAInteger:
     def __add__(self: T, other: VBACompatible) -> T:
         return type(self)(self.value + int(other))
 
-     def __radd__(self: T, other: VBACompatible) -> T:
+    def __radd__(self: T, other: VBACompatible) -> T:
         return type(self)(self.value + int(other))
 
     def __sub__(self: T, other: VBACompatible) -> T:
