@@ -10,7 +10,7 @@ class VBAArray:
         self._bounds = [(base, base + len(args) - 1)]
 
     @classmethod
-    def initialize(cls, *args: int | list[tuple], empty: Any = None)-> Type[T]:
+    def initialize(cls, *args: int | list[tuple[int, int]], empty: Any = None)-> Type[T]:
         data = list(args)
         if len(data) == 1 and not isinstance(data[0], tuple):
             input = [empty] * (data[0] + 1)
