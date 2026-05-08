@@ -1,16 +1,16 @@
-from typing import Any, Tuple, TypeVar, Union, List
+from typing import Any, Tuple, Type, TypeVar, Union
 
 
 T = TypeVar('T', bound='VBAArray')
 
 
 class VBAArray:
-    def __init__(self: T, *args: Any, base: int = 0):
+    def __init__(self: T, *args: Any, base: int = 0) -> None:
         self._data = list(args)
         self._bounds = [(base, base + len(args) - 1)]
 
     @classmethod
-    def initialize(cls, *args, empty: Any=None):
+    def initialize(cls, *args, empty: Any = None)-> Type[T]:
         data = list(args)
         if len(data) == 1 and not isinstance(data[0], tuple):
             input = [empty] * (data[0] + 1)
