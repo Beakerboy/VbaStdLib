@@ -5,20 +5,6 @@ from vba_stdlib.enums import VbCallType, VbMsgBoxResult, VbMsgBoxStyle
 class Interaction:
 
     @staticmethod
-    def library() -> dict:
-        return {
-            "name": "interaction",
-            "type": FunctionType.MODULE,
-            "functions": {
-                "msgbox": {
-                    "name": "msgbox",
-                    "type": FunctionType.FUNCTION,
-                    "handle": getattr(Interaction, "msgbox"),
-                }
-            }
-        }
-
-    @staticmethod
     def CallByName(obj: object, proc_name: str, call_type: VbCallType, args: list[Any]) -> Any:
         pass
 
