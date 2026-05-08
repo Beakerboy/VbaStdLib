@@ -11,6 +11,7 @@ def test_base_0_initialization():
     assert arr.lbound() == 0
     assert arr.ubound() == 2
 
+
 def test_base_1_initialization():
     """Tests comma-separated initialization with explicit Base 1."""
     arr = VBAArray(100, 200, 300, base=1)
@@ -20,10 +21,27 @@ def test_base_1_initialization():
     assert arr.lbound() == 1
     assert arr.ubound() == 3
 
+
+def test_initialize_with_number() -> None:
+    arr = VBAArray.initialize(3)
+    assert arr.lbound() == 0
+    assert arr.ubound() == 3
+    assert arr[0] is None
+    assert arr[3] is None
+
+
+def test_initialize_with_tuple() -> None:
+    arr = VBAArray.initialize((0, 3))
+    assert arr.lbound() == 0
+    assert arr.ubound() == 3
+    assert arr[0] is None
+    assert arr[3] is None
+
+
 def test_multidimensional_custom_bounds():
     """Tests Array(1 To 2, 1 To 6) style initialization."""
     # Rows: 1 to 2, Cols: 1 to 6
-    arr = VBAArray((1, 2), (1, 6))
+    arr = VBAArray.initialize((1, 2), (1, 6))
     
     # Set and Get
     arr[1, 1] = "Top-Left"
