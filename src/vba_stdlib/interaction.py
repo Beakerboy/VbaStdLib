@@ -31,7 +31,7 @@ class Interaction:
         pass
 
     @staticmethod
-    def msgbox(prompt: Any,
+    def MsgBox (prompt: Any,
                buttons: VbMsgBoxStyle = VbMsgBoxStyle.vbOKOnly,
                title: str = "",
                help_file: str = "",
