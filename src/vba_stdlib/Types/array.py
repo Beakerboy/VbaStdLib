@@ -11,7 +11,7 @@ class VBAArray:
         if len(data) == 1 and not isinstance(data[0], tuple):
             input = [empty] * (data[0] + 1)
             return cls(*input)
-        elif len(data) == 1:
+        else:
             arr = cls.__new__(cls)
             arr._bounds = list(args)
             shape = tuple(max_idx - min_idx + 1 for min_idx, max_idx in arr._bounds)
