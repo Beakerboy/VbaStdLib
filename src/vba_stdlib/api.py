@@ -5,13 +5,15 @@ api = {
     "name": "vba",
     "type": "project",
     "modules": {
-        "name": "interaction",
-        "type": "module",
-        "functions": {
-            "msgbox": {
-                "name": "msgbox",
-                "type": "function",
-                "handle": getattr(Interaction, "msgbox"),
+        "interaction": {
+            "name": "interaction",
+            "type": "module",
+            "functions": {
+                "msgbox": {
+                    "name": "msgbox",
+                    "type": "function",
+                    "handle": getattr(Interaction, "msgbox"),
+                }
             }
         }
     }
