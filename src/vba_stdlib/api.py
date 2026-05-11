@@ -8,6 +8,7 @@ api = {
         "functions": {
             "msgbox": {
                 "name": "msgbox",
+                "type": "function",
                 "handle": getattr(Interaction, "msgbox"),
             }
         }
