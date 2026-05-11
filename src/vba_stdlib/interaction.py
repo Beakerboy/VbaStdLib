@@ -5,19 +5,19 @@ from vba_stdlib.enums import VbCallType, VbMsgBoxResult, VbMsgBoxStyle
 class Interaction:
 
     @staticmethod
-    def CallByName(obj: object, proc_name: str, call_type: VbCallType, args: list[Any]) -> Any:
+    def callbyname(obj: object, proc_name: str, call_type: VbCallType, args: list[Any]) -> Any:
         pass
 
     @staticmethod
-    def Choose(index, choice) -> Any:
+    def choose(index, choice) -> Any:
         pass
 
     @staticmethod
-    def CreateObject() -> object:
+    def createobject() -> object:
         pass
 
     @staticmethod
-    def MsgBox (prompt: Any,
+    def msgbox (prompt: Any,
                buttons: VbMsgBoxStyle = VbMsgBoxStyle.vbOKOnly,
                title: str = "",
                help_file: str = "",
