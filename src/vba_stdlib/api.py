@@ -12,6 +12,8 @@ api = {
                 "msgbox": {
                     "name": "msgbox",
                     "type": "function",
+                    "project": "vba",
+                    "module": "interaction",
                     "handle": getattr(Interaction, "msgbox"),
                 }
             }
