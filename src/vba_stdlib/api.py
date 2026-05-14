@@ -1,5 +1,5 @@
 from vba_stdlib.interaction import Interaction
-
+from vba_stdlib.math import Math
 
 api = {
     "name": "vba",
@@ -15,6 +15,19 @@ api = {
                     "project": "vba",
                     "module": "interaction",
                     "handle": getattr(Interaction, "msgbox"),
+                }
+            }
+        },
+        "math": {
+            "name": "math",
+            "type": "module",
+            "functions": {
+                "abs": {
+                    "name": "abs",
+                    "type": "function",
+                    "project": "vba",
+                    "module": "math",
+                    "handle": getattr(Math, "abs"),
                 }
             }
         }
