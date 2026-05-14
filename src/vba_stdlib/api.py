@@ -16,7 +16,7 @@ api = {
                     "module": "interaction",
                     "handle": getattr(Interaction, "msgbox"),
                     "params": [{
-                            "name": "number",
+                            "name": "prompt",
                             "optional": False,
                             "default": ""
                     }]
@@ -33,6 +33,11 @@ api = {
                     "project": "vba",
                     "module": "math",
                     "handle": getattr(Math, "abs"),
+                    "params": [{
+                            "name": "number",
+                            "optional": False,
+                            "default": ""
+                    }]
                 }
             }
         }
