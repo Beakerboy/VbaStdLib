@@ -1,17 +1,17 @@
-from vba_stdlib.Types.empty import Empty
-from vba_stdlib.Types.null import Null
+from __future__ import annotations
 from typing import Any, TypeVar
+from vba_types import VBADouble, VBATypeBase
 
 
 class Math:
 
     @staticmethod
-    def abs(number: Any) -> float:
-        if isinstance(number, Null):
-            return number
-        if isinstance(number, Empty):
-            return 0
-        return abs(number)
+    def abs(number: VBATypeBase) -> VBADouble:
+        # if isinstance(number, Null):
+        #     return number
+        # if isinstance(number, Empty):
+        #     return 0
+        return VBADouble(abs(number))
 
     @staticmethod
     def atn(number: Any) -> float:
