@@ -5,7 +5,10 @@ from vba_stdlib.enums import VbCallType, VbMsgBoxResult, VbMsgBoxStyle
 class Interaction:
 
     @staticmethod
-    def callbyname(obj: object, proc_name: str, call_type: VbCallType, args: list[Any]) -> Any:
+    def callbyname(obj: object,
+                   proc_name: str,
+                   call_type: VbCallType,
+                   args: list[Any]) -> Any:
         pass
 
     @staticmethod
