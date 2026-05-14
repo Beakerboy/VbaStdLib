@@ -15,6 +15,11 @@ api = {
                     "project": "vba",
                     "module": "interaction",
                     "handle": getattr(Interaction, "msgbox"),
+                    "params": [{
+                            "name": "number",
+                            "optional": False,
+                            "default": ""
+                    }]
                 }
             }
         },
