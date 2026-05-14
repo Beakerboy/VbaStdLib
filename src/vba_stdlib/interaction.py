@@ -18,18 +18,18 @@ class Interaction:
 
     @staticmethod
     def msgbox (prompt: Any,
-               buttons: VbMsgBoxStyle = VbMsgBoxStyle.vbOKOnly,
-               title: str = "",
-               help_file: str = "",
-               context: int | None = None
-              ) -> VbMsgBoxResult:
+                buttons: VbMsgBoxStyle = VbMsgBoxStyle.vbOKOnly,
+                title: str = "",
+                help_file: str = "",
+                context: int | None = None
+               ) -> VbMsgBoxResult:
         print(str(prompt))
         return VbMsgBoxResult.vbOK
 
     @staticmethod
-    def DoEvents() -> None:
+    def doevents() -> None:
         pass
 
     @staticmethod
-    def Environ() -> None:
+    def environ() -> None:
         pass
