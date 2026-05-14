@@ -46,7 +46,7 @@ class Math:
         pass
 
     @staticmethod
-    def Sqr(number: Any) -> float:
+    def sqr(number: Any) -> float:
         pass
 
     @staticmethod
