@@ -1,5 +1,5 @@
 from __future__ import annotations
-from typing import Any, TypeVar
+from typing import Any
 from vba_types import VBADouble, VBATypeBase
 
 
@@ -20,7 +20,7 @@ class Math:
     @staticmethod
     def cos(number: Any) -> float:
         pass
-    
+
     @staticmethod
     def exp(number: Any) -> float:
         pass
