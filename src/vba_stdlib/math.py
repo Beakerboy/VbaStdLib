@@ -11,7 +11,7 @@ class Math:
         #     return number
         # if isinstance(number, Empty):
         #     return 0
-        return VBADouble(abs(number))
+        return VBADouble(abs(number.value))
 
     @staticmethod
     def atn(number: Any) -> float:
