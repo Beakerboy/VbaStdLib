@@ -17,7 +17,7 @@ class Interaction:
         if help_file is not None and context is None:
             # raise some sort of error
             pass
-        number_type = buttons & 7
+        number_type = VBALong(buttons.value & 7)
         
         if number_type == VbMsgBoxStyle.vbokonly:
             button_text = "OK"
@@ -35,7 +35,7 @@ class Interaction:
             # what kind of exception should this be?
             raise Exception("unknown button type")
 
-        icon = button & 112
+        icon = VBALong(buttons.value & 112)
         if icon == VbMsgBoxStyle.vbcritical:
             window_icon = "X"
         elif icon == VbMsgBoxStyle.vbquestion:
@@ -48,7 +48,7 @@ class Interaction:
             # what kind of exception should this be?
             raise Exception("unknown icon type")
 
-        default = button & 768
+        default = VBALong(buttons & 768)
         if default == VbMsgBoxStyle.vbdefaultbutton1:
             default_button = 1
         elif default == VbMsgBoxStyle.vbdefaultbutton2:
