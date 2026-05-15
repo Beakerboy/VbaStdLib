@@ -1,6 +1,9 @@
-from typing import Any
+from typing import Any, TypeVar
 from vba_stdlib.enums import VbMsgBoxResult, VbMsgBoxStyle
 from vba_types import VBABaseType, VBAString, VBALong
+
+
+T = TypeVar('T', bound='Interaction')
 
 
 class Interaction:
