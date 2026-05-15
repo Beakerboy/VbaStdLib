@@ -56,7 +56,7 @@ class Interaction:
             # what kind of exception should this be?
             raise Exception("unknown icon type")
 
-        default = VBALong(buttons.value.value & 768)
+        default = buttons.value.value & 768
         if default == VbMsgBoxStyle.vbdefaultbutton1.value.value:
             default_button = 1
         elif default == VbMsgBoxStyle.vbdefaultbutton2.value.value:
