@@ -1,10 +1,12 @@
 from enum import Enum
 
+
 class FormShowConstants(Enum):
     # 6.1.1.1 FormShowConstants
     vbmodal = 1
     vbmodeless = 0
-  
+
+
 class VbAppWinStyle(Enum):
     # 6.1.1.2 VbAppWinStyle
     vbhide = 0
@@ -59,7 +61,7 @@ class VbMsgBoxResult(Enum):
     vbcancel = 2
     vbignore = 5
     vbno = 7
-    vboK = 1
+    vbok = 1
     vbretry = 4
     vbyes = 6
 
