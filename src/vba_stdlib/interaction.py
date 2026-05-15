@@ -1,6 +1,6 @@
 from typing import Any, TypeVar
 from vba_stdlib.enums import VbMsgBoxResult, VbMsgBoxStyle
-from vba_types import VBABaseType, VBAString, VBALong
+from vba_types import VBATypeBase, VBAString, VBALong
 
 
 T = TypeVar('T', bound='Interaction')
@@ -9,7 +9,7 @@ T = TypeVar('T', bound='Interaction')
 class Interaction:
 
     @staticmethod
-    def msgbox(prompt: VBABaseType,
+    def msgbox(prompt: VBATypeBase,
                buttons: VbMsgBoxStyle = VbMsgBoxStyle.vbokonly,
                title: VBABaseType | None = None,
                help_file: VBAString | None = None,
