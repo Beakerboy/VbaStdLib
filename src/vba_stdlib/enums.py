@@ -88,7 +88,7 @@ class VbMsgBoxStyle(Enum):
     vbretrycancel = VBALong(5)
     vbsystemmodal = VBALong(4096)
     vbyesno = VBALong(4)
-    vbyesnocencel = VBALong(3)
+    vbyesnocancel = VBALong(3)
 
 
 # 6.1.1.13
