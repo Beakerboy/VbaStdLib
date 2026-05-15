@@ -22,46 +22,46 @@ class Interaction:
         if help_file is not None and context is None:
             # raise some sort of error
             pass
-        number_type = VBALong(buttons.value.value & 7)
+        number_type = buttons.value.value & 7
         
-        if number_type == VbMsgBoxStyle.vbokonly.value:
+        if number_type == VbMsgBoxStyle.vbokonly.value.value:
             button_text = "OK"
-        elif number_type == VbMsgBoxStyle.vbokcancel.value:
+        elif number_type == VbMsgBoxStyle.vbokcancel.value.value:
             button_text = "OK    Cancel"
-        elif number_type == VbMsgBoxStyle.vbabortretryignore.value:
+        elif number_type == VbMsgBoxStyle.vbabortretryignore.value.value:
             button_text = "Abort    Retry    Ignore"
-        elif number_type == VbMsgBoxStyle.vbyesnocancel.value:
+        elif number_type == VbMsgBoxStyle.vbyesnocancel.value.value:
             button_text = "Yes    No    Cancel"
-        elif number_type == VbMsgBoxStyle.vbyesno.value:
+        elif number_type == VbMsgBoxStyle.vbyesno.value.value:
             button_text = "Yes    No"
-        elif number_type == VbMsgBoxStyle.vbretrycancel.value:
+        elif number_type == VbMsgBoxStyle.vbretrycancel.value.value:
             button_text = "Retry    Cancel"
         else:
             # what kind of exception should this be?
             raise Exception("unknown button type")
 
-        icon = VBALong(buttons.value.value & 112)
+        icon = buttons.value.value & 112
         window_icon = "X"
         if icon == VBALong(0):
             window_icon = ""
-        elif icon == VbMsgBoxStyle.vbcritical.value:
+        elif icon == VbMsgBoxStyle.vbcritical.value.value:
             window_icon = "X"
-        elif icon == VbMsgBoxStyle.vbquestion.value:
+        elif icon == VbMsgBoxStyle.vbquestion.value.value:
             window_icon = "?"
-        elif icon == VbMsgBoxStyle.vbexclamation.value:
+        elif icon == VbMsgBoxStyle.vbexclamation.value.value:
             window_icon = "!"
-        elif icon == VbMsgBoxStyle.vbinformation.value:
+        elif icon == VbMsgBoxStyle.vbinformation.value.value:
             window_icon = "i"
         else:
             # what kind of exception should this be?
             raise Exception("unknown icon type")
 
         default = VBALong(buttons.value.value & 768)
-        if default == VbMsgBoxStyle.vbdefaultbutton1.value:
+        if default == VbMsgBoxStyle.vbdefaultbutton1.value.value:
             default_button = 1
-        elif default == VbMsgBoxStyle.vbdefaultbutton2.value:
+        elif default == VbMsgBoxStyle.vbdefaultbutton2.value.value:
             default_button = 2
-        elif default == VbMsgBoxStyle.vbdefaultbutton3.value:
+        elif default == VbMsgBoxStyle.vbdefaultbutton3.value.value:
             default_button = 3
         else:
             # default == VbMsgBoxStyle.vbdefaultbutton4:
