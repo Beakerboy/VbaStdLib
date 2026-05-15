@@ -1,19 +1,21 @@
 from typing import Any
 from vba_stdlib.enums import VbMsgBoxResult, VbMsgBoxStyle
-from vba_types import VBAString, VBALong
+from vba_types import VBABaseType, VBAString, VBALong
 
 
 class Interaction:
 
     @staticmethod
-    def msgbox(prompt: Any,
+    def msgbox(prompt: VBABaseType,
                buttons: VbMsgBoxStyle = VbMsgBoxStyle.vbokonly,
-               title: VBAString | None = None,
+               title: VBABaseType | None = None,
                help_file: VBAString | None = None,
                context: VBALong | None = None) -> VbMsgBoxResult:
+
         if title is None:
-            # title = current_project_name
-            pass
+            title = "Microsoft Excel"
+        else:
+            title = str(title)
         if help_file is not None and context is None:
             # raise some sort of error
             pass
@@ -36,7 +38,10 @@ class Interaction:
             raise Exception("unknown button type")
 
         icon = VBALong(buttons.value & 112)
-        if icon == VbMsgBoxStyle.vbcritical:
+        window_icon = "X"
+        if icon == VBALong(0):
+            window_icon = ""
+        elif icon == VbMsgBoxStyle.vbcritical:
             window_icon = "X"
         elif icon == VbMsgBoxStyle.vbquestion:
             window_icon = "?"
@@ -60,7 +65,7 @@ class Interaction:
             # are there ever 4 buttons? Is "Help" a fourth?
             # Help Button does not return. Another button must be pressed
             default_button = 4
-        print(str(prompt))
+        print(f"{title}\n{icon}\n{prompt}\n{button_text}")
         # input = input()
         # What to do if we receive an option not presented?
         # F1 is help
