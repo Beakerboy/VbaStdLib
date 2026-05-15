@@ -42,7 +42,7 @@ class Interaction:
 
         icon = buttons.value.value & 112
         window_icon = "X"
-        if icon == VBALong(0):
+        if icon == 0:
             window_icon = ""
         elif icon == VbMsgBoxStyle.vbcritical.value.value:
             window_icon = "X"
