@@ -77,7 +77,7 @@ class VbMsgBoxStyle(Enum):
     vbdefaultbutton3 = VBALong(512)
     vbdefaultbutton4 = VBALong(768)
     vbexclamation = VBALong(48)
-    vbdinformation = VBALong(64)
+    vbinformation = VBALong(64)
     vbmsgboxhelpbutton = VBALong(16384)
     vbmsgboxright = VBALong(524288)
     vbmsgboxrtlreading = VBALong(1048576)
