@@ -26,7 +26,7 @@ class Interaction:
                help_file: str = "",
                context: int | None = None) -> VbMsgBoxResult:
         print(str(prompt))
-        return VbMsgBoxResult.vbOK
+        return VbMsgBoxResult.vbok
 
     @staticmethod
     def doevents() -> None:
