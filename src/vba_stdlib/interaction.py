@@ -25,10 +25,10 @@ class Interaction:
         number_type = buttons.value.value & 7
         
         if number_type == VbMsgBoxStyle.vbokonly.value.value:
-            button_list = [VbMsgBoxStyle.vbok]
+            button_list = [VbMsgBoxResult.vbok]
             button_text = "OK"
         elif number_type == VbMsgBoxStyle.vbokcancel.value.value:
-            button_list = [VbMsgBoxStyle.vbok, VbMsgBoxStyle.vbcancel]
+            button_list = [VbMsgBoxResult.vbok, VbMsgBoxResult.vbcancel]
             button_text = "OK    Cancel"
         elif number_type == VbMsgBoxStyle.vbabortretryignore.value.value:
             button_text = "Abort    Retry    Ignore"
