@@ -1,4 +1,5 @@
 from enum import Enum
+from vba_types import VBALong
 
 
 class FormShowConstants(Enum):
@@ -57,18 +58,37 @@ class VbDayOfWeek(Enum):
 
 class VbMsgBoxResult(Enum):
     # 6.1.1.11 VbMsgBoxResult
-    vbabort = 3
-    vbcancel = 2
-    vbignore = 5
-    vbno = 7
-    vbok = 1
-    vbretry = 4
-    vbyes = 6
+    vbabort = VBALong(3)
+    vbcancel = VBALong(2)
+    vbignore = VBALong(5)
+    vbno = VBALong(7)
+    vbok = VBALong(1)
+    vbretry = VBALong(4)
+    vbyes = VBALong(6)
 
 
 class VbMsgBoxStyle(Enum):
     # 6.1.1.12 VbMsgBoxStyle
-    vbokonly = 0
+    vbabortretryignore = VBALong(2)
+    vbapplicationmodal = VBALong(0)
+    vbcritical = VBALong(16)
+    vbdefaultbutton1 = VBALong(0)
+    vbdefaultbutton2 = VBALong(256)
+    vbdefaultbutton3 = VBALong(512)
+    vbdefaultbutton4 = VBALong(768)
+    vbexclamation = VBALong(48)
+    vbinformation = VBALong(64)
+    vbmsgboxhelpbutton = VBALong(16384)
+    vbmsgboxright = VBALong(524288)
+    vbmsgboxrtlreading = VBALong(1048576)
+    vbmsgboxsetforeground = VBALong(65536)
+    vbokcancel = VBALong(1)
+    vbokonly = VBALong(0)
+    vbquestion = VBALong(32)
+    vbretrycancel = VBALong(5)
+    vbsystemmodal = VBALong(4096)
+    vbyesno = VBALong(4)
+    vbyesnocancel = VBALong(3)
 
 
 # 6.1.1.13
