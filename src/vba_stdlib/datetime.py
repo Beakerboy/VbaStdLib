@@ -1,86 +1,68 @@
 from datetime import datetime
 
 
-def dateadd(interval: str, number: int, date: datetime):
-    pass
-
-
-def datediff():
-    pass
-
-
-def datepart():
-    pass
-
-
-def dateserial():
-    pass
-
-
-def datevalue():
-    pass
-
-def day():
-    pass
+class Datetime:
     
+    def dateadd(interval: str, number: int, date: datetime):
+      pass
 
-def hour():
-    pass
+    def datediff():
+        pass
 
+    def datepart():
+        pass
 
-def minute():
-    pass
+    def dateserial():
+        pass
 
+    def datevalue():
+        pass
 
-def month():
-    pass
+    def day():
+        pass
     
+    def hour():
+        pass
 
-def second():
-    pass
+    def minute():
+        pass
 
+    def month():
+        pass
+    
+    def second():
+        pass
 
-def timeserial():
-    pass
+    def timeserial():
+        pass
 
+    def timevalue():
+        pass
 
-def timevalue():
-    pass
+    def weekday():
+        pass
 
+    def year():
+        pass
 
-def weekday():
-    pass
+    # Properties
+    def calendar():
+        pass
 
+    def date():
+        pass
 
+    def date_s():
+        pass
 
-def year():
-    pass
+    def now():
+        pass
 
+    def time():
+        pass
 
-# Properties
-def calendar():
-    pass
+    def time_s():
+        pass
 
-
-def date():
-    pass
-
-
-def date_s():
-    pass
-
-
-def now():
-    pass
-
-
-def time():
-    pass
-
-
-def time_s():
-    pass
-
-
-def timer():
-    pass
+    def timer():
+        pass
