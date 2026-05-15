@@ -11,7 +11,7 @@ class Interaction:
     @staticmethod
     def msgbox(prompt: VBATypeBase,
                buttons: VbMsgBoxStyle = VbMsgBoxStyle.vbokonly,
-               title: VBABaseType | None = None,
+               title: VBATypeBase | None = None,
                help_file: VBAString | None = None,
                context: VBALong | None = None) -> VbMsgBoxResult:
 
