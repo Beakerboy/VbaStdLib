@@ -70,10 +70,12 @@ class Interaction:
             # are there ever 4 buttons? Is "Help" a fourth?
             # Help Button does not return. Another button must be pressed
             default_button = 4
+        if default_button > len(button_list):
+            default_button = 1
         print(f"{title}\n{icon}\n{prompt}\n{button_text}")
         input = input()
         tabs = input.count("\t")
-        pos = (default_button + tabs) % len(button_list)
+        pos = (default_button + tabs - 1) % len(button_list)
         # What to do if we receive an option not presented?
         # F1 is help
         # Esc is cancel
