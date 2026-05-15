@@ -1,4 +1,4 @@
-from typing import Any, TypeVar
+from typing import TypeVar
 from vba_stdlib.enums import VbMsgBoxResult, VbMsgBoxStyle
 from vba_types import VBATypeBase, VBAString, VBALong
 
@@ -23,7 +23,7 @@ class Interaction:
             # raise some sort of error
             pass
         number_type = buttons.value.value & 7
-        
+
         if number_type == VbMsgBoxStyle.vbokonly.value.value:
             button_list = [VbMsgBoxResult.vbok]
             button_text = "OK"
