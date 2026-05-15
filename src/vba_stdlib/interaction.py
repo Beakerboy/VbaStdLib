@@ -1,5 +1,5 @@
 from typing import Any
-from vba_stdlib.enums import VbCallType, VbMsgBoxResult, VbMsgBoxStyle
+from vba_stdlib.enums import VbMsgBoxResult, VbMsgBoxStyle
 
 
 class Interaction:
