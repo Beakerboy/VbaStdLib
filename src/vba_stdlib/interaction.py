@@ -24,17 +24,17 @@ class Interaction:
             pass
         number_type = VBALong(buttons.value.value & 7)
         
-        if number_type == VbMsgBoxStyle.vbokonly:
+        if number_type == VbMsgBoxStyle.vbokonly.value:
             button_text = "OK"
-        elif number_type == VbMsgBoxStyle.vbokcancel:
+        elif number_type == VbMsgBoxStyle.vbokcancel.value:
             button_text = "OK    Cancel"
-        elif number_type == VbMsgBoxStyle.vbabortretryignore:
+        elif number_type == VbMsgBoxStyle.vbabortretryignore.value:
             button_text = "Abort    Retry    Ignore"
-        elif number_type == VbMsgBoxStyle.vbyesnocancel:
+        elif number_type == VbMsgBoxStyle.vbyesnocancel.value:
             button_text = "Yes    No    Cancel"
-        elif number_type == VbMsgBoxStyle.vbyesno:
+        elif number_type == VbMsgBoxStyle.vbyesno.value:
             button_text = "Yes    No"
-        elif number_type == VbMsgBoxStyle.vbretrycancel:
+        elif number_type == VbMsgBoxStyle.vbretrycancel.value:
             button_text = "Retry    Cancel"
         else:
             # what kind of exception should this be?
@@ -44,24 +44,24 @@ class Interaction:
         window_icon = "X"
         if icon == VBALong(0):
             window_icon = ""
-        elif icon == VbMsgBoxStyle.vbcritical:
+        elif icon == VbMsgBoxStyle.vbcritical.value:
             window_icon = "X"
-        elif icon == VbMsgBoxStyle.vbquestion:
+        elif icon == VbMsgBoxStyle.vbquestion.value:
             window_icon = "?"
-        elif icon == VbMsgBoxStyle.vbexclamation:
+        elif icon == VbMsgBoxStyle.vbexclamation.value:
             window_icon = "!"
-        elif icon == VbMsgBoxStyle.vbinformation:
+        elif icon == VbMsgBoxStyle.vbinformation.value:
             window_icon = "i"
         else:
             # what kind of exception should this be?
             raise Exception("unknown icon type")
 
         default = VBALong(buttons.value.value & 768)
-        if default == VbMsgBoxStyle.vbdefaultbutton1:
+        if default == VbMsgBoxStyle.vbdefaultbutton1.value:
             default_button = 1
-        elif default == VbMsgBoxStyle.vbdefaultbutton2:
+        elif default == VbMsgBoxStyle.vbdefaultbutton2.value:
             default_button = 2
-        elif default == VbMsgBoxStyle.vbdefaultbutton3:
+        elif default == VbMsgBoxStyle.vbdefaultbutton3.value:
             default_button = 3
         else:
             # default == VbMsgBoxStyle.vbdefaultbutton4:
