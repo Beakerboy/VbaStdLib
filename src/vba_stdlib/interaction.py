@@ -12,7 +12,7 @@ class Interaction:
         pass
 
     @staticmethod
-    def choose(index, choice) -> Any:
+    def choose(index: Any, choice: Any) -> Any:
         pass
 
     @staticmethod
@@ -20,7 +20,7 @@ class Interaction:
         pass
 
     @staticmethod
-    def msgbox (prompt: Any,
+    def msgbox(prompt: Any,
                 buttons: VbMsgBoxStyle = VbMsgBoxStyle.vbOKOnly,
                 title: str = "",
                 help_file: str = "",
