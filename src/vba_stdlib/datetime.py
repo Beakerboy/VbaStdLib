@@ -1,22 +1,9 @@
 from datetime import datetime, date, timedelta
-from typing import Union, Optional, Any
+from typing import Union, Optional, Any, TypeVar
 import calendar
 
-# Assuming VBADate is defined elsewhere in your project
-# If VBADate wraps a python datetime/date object, you can adapt the conversions below.
-class VBADate:
-    def __init__(self, dt: datetime):
-        self.dt = dt
-    
-    def to_datetime(self) -> datetime:
-        return self.dt
-    
-    @classmethod
-    def from_datetime(cls, dt: datetime) -> 'VBADate':
-        return cls(dt)
 
-
-class DateRime:
+class DateTime:
     """
     Implements MS-VBA DateTime module functions using Python's datetime library.
     Accepts and returns VBADate objects to mimic native VBA behavior.
