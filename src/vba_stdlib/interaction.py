@@ -73,8 +73,8 @@ class Interaction:
         if default_button > len(button_list):
             default_button = 1
         print(f"{title}\n{icon}\n{prompt}\n{button_text}")
-        input = input()
-        tabs = input.count("\t")
+        user_supplied = input()
+        tabs = user_supplied.count("\t")
         pos = (default_button + tabs - 1) % len(button_list)
         # What to do if we receive an option not presented?
         # F1 is help
