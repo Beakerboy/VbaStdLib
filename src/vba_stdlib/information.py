@@ -1,1 +1,2 @@
-
+class Information:
+    pass
