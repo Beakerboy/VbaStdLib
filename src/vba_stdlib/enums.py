@@ -2,17 +2,17 @@ from enum import Enum
 
 class FormShowConstants(Enum):
     # 6.1.1.1 FormShowConstants
-    vbModal = 1
-    vb_modeless = 0
+    vbmodal = 1
+    vbmodeless = 0
   
 class VbAppWinStyle(Enum):
     # 6.1.1.2 VbAppWinStyle
-    vbHide = 0
-    vbMaximizedFocus = 3
-    vbMinimuzedFocus = 2
-    vbMinimizedNoFocus = 6
-    vbNormalFocus = 1
-    vbNormalNoFocus = 4
+    vbhide = 0
+    vbmaximizedfocus = 3
+    vbminimuzedfocus = 2
+    vbminimizednofocus = 6
+    vbnormalfocus = 1
+    vbnormalnofocus = 4
 
 
 # 6.1.1.3
@@ -20,10 +20,10 @@ class VbAppWinStyle(Enum):
 
 class VbCallType(Enum):
     # 6.1.1.4 VbCallType
-    vbGet = 2
-    vbLet = 4
-    vbMethod = 1
-    vbSet = 8
+    vbget = 2
+    vblet = 4
+    vbmethod = 1
+    vbset = 8
 
 
 # 6.1.1.5
@@ -35,13 +35,13 @@ class VbCallType(Enum):
 class VbDayOfWeek(Enum):
     # 6.1.1.7 VbDayOfWeek
     vbsunday = 1
-    vbMonday = 2
-    vbTuesday = 3
-    vbWednesday = 4
-    vbThursday = 5
-    vbFriday = 6
-    vbSaturday = 7
-    vbUseSystemDayOfWeek = 0
+    vbmonday = 2
+    vbtuesday = 3
+    vbwednesday = 4
+    vbthursday = 5
+    vbfriday = 6
+    vbsaturday = 7
+    vbusesystemdayofweek = 0
 
 
 # 6.1.1.8
