@@ -39,7 +39,7 @@ class Interaction:
         if icon == VbMsgBoxStyle.vbcritical:
             window_icon = "X"
         elif icon == VbMsgBoxStyle.vbquestion:
-            window_icon =  = "?"
+            window_icon = "?"
         elif icon == VbMsgBoxStyle.vbexclamation:
             window_icon = "!"
         elif icon == VbMsgBoxStyle.vbinformation:
