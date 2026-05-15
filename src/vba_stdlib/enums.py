@@ -82,7 +82,7 @@ class VbMsgBoxStyle(Enum):
     vbmsgboxright = VBALong(524288)
     vbmsgboxrtlreading = VBALong(1048576)
     vbmsgboxsetforeground = VBALong(65536)
-    vbaokcancel = VBALong(1)
+    vbokcancel = VBALong(1)
     vbokonly = VBALong(0)
     vbquestion = VBALong(32)
     vbretrycancel = VBALong(5)
