@@ -24,7 +24,7 @@ class Interaction:
                buttons: VbMsgBoxStyle = VbMsgBoxStyle.vbokonly,
                title: str = "",
                help_file: str = "",
-               context: int | None = None) -> VbMsgBoxResul:
+               context: int | None = None) -> VbMsgBoxResult:
         print(str(prompt))
         return VbMsgBoxResult.vbOK
 
