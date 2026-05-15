@@ -1,119 +1,137 @@
-import unittest
+import pytest
 from datetime import datetime, date, timedelta
-# Adjust the import statement below to match your file naming structure
-# from my_module import DateRime, VBADate 
-
-class TestDateRime(unittest.TestCase):
-
-    def test_now(self) -> None:
-        """Tests that Now returns the current time within a tight threshold."""
-        vba_now = DateRime.Now()
-        self.assertIsInstance(vba_now, VBADate)
-        py_dt = vba_now.to_datetime()
-        # Ensure it matches current time closely
-        self.assertTrue((datetime.now() - py_dt).total_seconds() < 2)
-
-    def test_date(self) -> None:
-        """Tests that Date isolates the day component with zeroed time."""
-        vba_date = DateRime.Date()
-        py_dt = vba_date.to_datetime()
-        now = datetime.now()
-        self.assertEqual(py_dt.year, now.year)
-        self.assertEqual(py_dt.month, now.month)
-        self.assertEqual(py_dt.day, now.day)
-        self.assertEqual(py_dt.hour, 0)
-        self.assertEqual(py_dt.minute, 0)
-
-    def test_time(self) -> None:
-        """Tests that Time returns current hours/minutes with VBA base date 1899-12-30."""
-        vba_time = DateRime.Time()
-        py_dt = vba_time.to_datetime()
-        now = datetime.now()
-        self.assertEqual(py_dt.year, 1899)
-        self.assertEqual(py_dt.month, 12)
-        self.assertEqual(py_dt.day, 30)
-        self.assertEqual(py_dt.hour, now.hour)
-
-    def test_date_serial(self) -> None:
-        """Tests manual generation of date serial values."""
-        res = DateRime.DateSerial(2026, 5, 14)
-        self.assertEqual(res.to_datetime(), datetime(2026, 5, 14, 0, 0))
-
-    def test_time_serial(self) -> None:
-        """Tests manual generation of time serial values with VBA base date."""
-        res = DateRime.TimeSerial(14, 30, 15)
-        self.assertEqual(res.to_datetime(), datetime(1899, 12, 30, 14, 30, 15))
-
-    def test_date_value(self) -> None:
-        """Tests string conversion into a valid date."""
-        res = DateRime.DateValue("2026-05-14")
-        self.assertEqual(res.to_datetime(), datetime(2026, 5, 14, 0, 0))
-
-    def test_time_value(self) -> None:
-        """Tests string conversion into a valid time expression."""
-        res = DateRime.TimeValue("14:30:15")
-        self.assertEqual(res.to_datetime(), datetime(1899, 12, 30, 14, 30, 15))
-
-    def test_date_extraction_fields(self) -> None:
-        """Tests field-specific extraction components like Day, Month, Year."""
-        dt_target = VBADate(datetime(2026, 5, 14, 13, 45, 30))
-        self.assertEqual(DateRime.Year(dt_target), 2026)
-        self.assertEqual(DateRime.Month(dt_target), 5)
-        self.assertEqual(DateRime.Day(dt_target), 14)
-        self.assertEqual(DateRime.Hour(dt_target), 13)
-        self.assertEqual(DateRime.Minute(dt_target), 45)
-        self.assertEqual(DateRime.Second(dt_target), 30)
-
-    def test_weekday(self) -> None:
-        """Tests extraction of calendar weekday integer index values."""
-        # May 14, 2026 is a Thursday
-        dt_target = VBADate(datetime(2026, 5, 14))
-        # Default vbSunday=1 means Sunday=1, Monday=2, Tuesday=3, Wednesday=4, Thursday=5
-        self.assertEqual(DateRime.Weekday(dt_target), 5)
-
-    def test_month_and_weekday_names(self) -> None:
-        """Tests conversion of numeric date identifiers to localized string expressions."""
-        self.assertEqual(DateRime.MonthName(5), "May")
-        self.assertEqual(DateRime.MonthName(5, abbreviate=True), "May")
-        # 5 is Thursday under default system values (Sunday=1)
-        self.assertEqual(DateRime.WeekdayName(5), "Thursday")
-
-    def test_date_add(self) -> None:
-        """Tests math-based modifications across key time intervals."""
-        base = VBADate(datetime(2026, 5, 14, 12, 0, 0))
-        
-        # Test Year increment
-        self.assertEqual(DateRime.DateAdd("yyyy", 2, base).to_datetime().year, 2028)
-        # Test Month increment
-        self.assertEqual(DateRime.DateAdd("m", 1, base).to_datetime().month, 6)
-        # Test Day increment
-        self.assertEqual(DateRime.DateAdd("d", 5, base).to_datetime().day, 19)
-        # Test Hour increment
-        self.assertEqual(DateRime.DateAdd("h", 3, base).to_datetime().hour, 15)
-
-    def test_date_diff(self) -> None:
-        """Tests span verification calculations across arbitrary ranges."""
-        d1 = VBADate(datetime(2026, 5, 14))
-        d2 = VBADate(datetime(2027, 5, 14))
-        d3 = VBADate(datetime(2026, 5, 24))
-
-        self.assertEqual(DateRime.DateDiff("yyyy", d1, d2), 1)
-        self.assertEqual(DateRime.DateDiff("m", d1, d2), 12)
-        self.assertEqual(DateRime.DateDiff("d", d1, d3), 10)
-
-    def test_date_part(self) -> None:
-        """Tests isolated metric validation calls via string identifiers."""
-        dt_target = VBADate(datetime(2026, 5, 14))
-        self.assertEqual(DateRime.DatePart("yyyy", dt_target), 2026)
-        self.assertEqual(DateRime.DatePart("m", dt_target), 5)
-        self.assertEqual(DateRime.DatePart("d", dt_target), 14)
-
-    def test_timer(self) -> None:
-        """Tests that Timer returns numerical float duration lengths correctly."""
-        sec_elapsed = DateRime.Timer()
-        self.assertIsInstance(sec_elapsed, float)
-        self.assertTrue(0 <= sec_elapsed <= 86400)
+# Adjust this import to match your file and project structure
+# from my_module import DateRime, VBADate
 
 
-if __name__ == "__main__":
-    unittest.main()
+# ==========================================
+# FIXTURES (Shared Test Setup)
+# ==========================================
+
+@pytest.fixture
+def target_date() -> VBADate:
+    """Provides a fixed, standard date for extraction and calculation tests."""
+    return VBADate(datetime(2026, 5, 14, 13, 45, 30))
+
+
+@pytest.fixture
+def base_date() -> VBADate:
+    """Provides a flat baseline date with no time components."""
+    return VBADate(datetime(2026, 5, 14, 0, 0, 0))
+
+
+# ==========================================
+# TEST CASES
+# ==========================================
+
+def test_now() -> None:
+    """Verifies that Now returns the current time within a narrow execution window."""
+    vba_now = DateRime.Now()
+    assert isinstance(vba_now, VBADate)
+    
+    py_dt = vba_now.to_datetime()
+    time_delta = datetime.now() - py_dt
+    assert time_delta.total_seconds() < 2
+
+
+def test_date() -> None:
+    """Ensures Date isolates the day component with zeroed out time parameters."""
+    vba_date = DateRime.Date()
+    py_dt = vba_date.to_datetime()
+    now = datetime.now()
+    
+    assert py_dt.year == now.year
+    assert py_dt.month == now.month
+    assert py_dt.day == now.day
+    assert py_dt.hour == 0
+    assert py_dt.minute == 0
+
+
+def test_time() -> None:
+    """Validates that Time uses the standard VBA base date of 1899-12-30."""
+    vba_time = DateRime.Time()
+    py_dt = vba_time.to_datetime()
+    now = datetime.now()
+    
+    assert py_dt.year == 1899
+    assert py_dt.month == 12
+    assert py_dt.day == 30
+    assert py_dt.hour == now.hour
+
+
+def test_date_serial() -> None:
+    """Checks the assembly of manual year, month, and day components."""
+    res = DateRime.DateSerial(2026, 5, 14)
+    assert res.to_datetime() == datetime(2026, 5, 14, 0, 0)
+
+
+def test_time_serial() -> None:
+    """Checks the assembly of hours, minutes, and seconds into a base VBA date."""
+    res = DateRime.TimeSerial(14, 30, 15)
+    assert res.to_datetime() == datetime(1899, 12, 30, 14, 30, 15)
+
+
+def test_date_value() -> None:
+    """Confirms string parsing translates cleanly into a date wrapper."""
+    res = DateRime.DateValue("2026-05-14")
+    assert res.to_datetime() == datetime(2026, 5, 14, 0, 0)
+
+
+def test_time_value() -> None:
+    """Confirms time-string parsing outputs the correct time metrics."""
+    res = DateRime.TimeValue("14:30:15")
+    assert res.to_datetime() == datetime(1899, 12, 30, 14, 30, 15)
+
+
+def test_date_extraction_fields(target_date: VBADate) -> None:
+    """Verifies granular fields are extracted correctly from a VBADate object."""
+    assert DateRime.Year(target_date) == 2026
+    assert DateRime.Month(target_date) == 5
+    assert DateRime.Day(target_date) == 14
+    assert DateRime.Hour(target_date) == 13
+    assert DateRime.Minute(target_date) == 45
+    assert DateRime.Second(target_date) == 30
+
+
+def test_weekday(base_date: VBADate) -> None:
+    """Tests weekday translation (May 14, 2026 is a Thursday -> 5 under default Sun=1)."""
+    assert DateRime.Weekday(base_date) == 5
+
+
+def test_month_and_weekday_names() -> None:
+    """Tests string literal outputs for localized month and weekday lookups."""
+    assert DateRime.MonthName(5) == "May"
+    assert DateRime.MonthName(5, abbreviate=True) == "May"
+    assert DateRime.WeekdayName(5) == "Thursday"
+
+
+def test_date_add(base_date: VBADate) -> None:
+    """Ensures DateAdd mathematical offsets return expected target dates."""
+    assert DateRime.DateAdd("yyyy", 2, base_date).to_datetime().year == 2028
+    assert DateRime.DateAdd("m", 1, base_date).to_datetime().month == 6
+    assert DateRime.DateAdd("d", 5, base_date).to_datetime().day == 19
+    assert DateRime.DateAdd("h", 3, base_date).to_datetime().hour == 3
+
+
+def test_date_diff(base_date: VBADate) -> None:
+    """Tests the span evaluation across variable interval targets."""
+    future_year = VBADate(datetime(2027, 5, 14))
+    future_days = VBADate(datetime(2026, 5, 24))
+
+    assert DateRime.DateDiff("yyyy", base_date, future_year) == 1
+    assert DateRime.DateDiff("m", base_date, future_year) == 12
+    assert DateRime.DateDiff("d", base_date, future_days) == 10
+
+
+def test_date_part(base_date: VBADate) -> None:
+    """Tests parsing specific string segments out of a target date."""
+    assert DateRime.DatePart("yyyy", base_date) == 2026
+    assert DateRime.DatePart("m", base_date) == 5
+    assert DateRime.DatePart("d", base_date) == 14
+
+
+def test_timer() -> None:
+    """Validates the daily countdown tick value yields an expected floating point scalar."""
+    seconds_elapsed = DateRime.Timer()
+    assert isinstance(seconds_elapsed, float)
+    assert 0.0 <= seconds_elapsed <= 86400.0
