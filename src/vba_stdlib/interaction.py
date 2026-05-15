@@ -21,10 +21,10 @@ class Interaction:
 
     @staticmethod
     def msgbox(prompt: Any,
-               buttons: VbMsgBoxStyle = VbMsgBoxStyle.vbOKOnly,
+               buttons: VbMsgBoxStyle = VbMsgBoxStyle.vbokonly,
                title: str = "",
                help_file: str = "",
-               context: int | None = None) -> VbMsgBoxResult:
+               context: int | None = None) -> vbmsgboxresult:
         print(str(prompt))
         return VbMsgBoxResult.vbOK
 
