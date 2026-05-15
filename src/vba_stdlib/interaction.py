@@ -25,8 +25,10 @@ class Interaction:
         number_type = buttons.value.value & 7
         
         if number_type == VbMsgBoxStyle.vbokonly.value.value:
+            button_list = [VbMsgBoxStyle.vbok]
             button_text = "OK"
         elif number_type == VbMsgBoxStyle.vbokcancel.value.value:
+            button_list = [VbMsgBoxStyle.vbok, VbMsgBoxStyle.vbcancel]
             button_text = "OK    Cancel"
         elif number_type == VbMsgBoxStyle.vbabortretryignore.value.value:
             button_text = "Abort    Retry    Ignore"
@@ -69,8 +71,10 @@ class Interaction:
             # Help Button does not return. Another button must be pressed
             default_button = 4
         print(f"{title}\n{icon}\n{prompt}\n{button_text}")
-        # input = input()
+        input = input()
+        tabs = input.count("\t")
+        pos = (default_button + tabs) % len(button_list)
         # What to do if we receive an option not presented?
         # F1 is help
         # Esc is cancel
-        return VbMsgBoxResult.vbok
+        return button_list[pos]
