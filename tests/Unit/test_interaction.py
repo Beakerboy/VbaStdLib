@@ -7,7 +7,7 @@ def test_msgbox(mocker: MockerFixture) -> None:
     mock_input = mocker.patch('builtins.input', return_value="")
     result = Interaction.msgbox("hello")
     assert result == VbMsgBoxResult.vbok
-    expected = "Microsoft Excel\n\nhello\nOK    Cancel"
+    expected = "Microsoft Excel\n\nhello\nOK"
     mock_print.assert_called_with(expected)
 
 def test_msgbox2(mocker: MockerFixture) -> None:
