@@ -55,18 +55,18 @@ class VbDayOfWeek(Enum):
 
 class VbMsgBoxResult(Enum):
     # 6.1.1.11 VbMsgBoxResult
-    vbAbort = 3
-    vbCancel = 2
-    vbIgnore = 5
-    vbNo = 7
-    vbOK = 1
-    vbRetry = 4
-    vbYes = 6
+    vbabort = 3
+    vbcancel = 2
+    vbignore = 5
+    vbno = 7
+    vboK = 1
+    vbretry = 4
+    vbyes = 6
 
 
 class VbMsgBoxStyle(Enum):
     # 6.1.1.12 VbMsgBoxStyle
-    vbOKOnly = 0
+    vbokonly = 0
 
 
 # 6.1.1.13
@@ -80,24 +80,24 @@ class VbMsgBoxStyle(Enum):
 
 class VbVarType(Enum):
     # 6.1.1.16 VbVarType
-    vbArray = 8192
-    vbBoolean = 11
-    vbByte = 17
-    vbCurrency = 6
-    vbDataObject = 13
-    vbDate = 7
-    vbDecimal = 14
-    vbDouble = 5
-    vbEmpty = 0
-    vbError = 10
-    vbInteger = 2
-    vbLong = 3
+    vbarray = 8192
+    vbboolean = 11
+    vbbyte = 17
+    vbcurrency = 6
+    vbdataobject = 13
+    vbdate = 7
+    vbdecimal = 14
+    vbdouble = 5
+    vbempty = 0
+    vberror = 10
+    vbinteger = 2
+    vblong = 3
     # defined only on implementations
     # that support a LongLong value type
-    vbLongLong = 20
-    vbNull = 1
-    vbObject = 9
-    vbSingle = 4
-    vbString = 8
-    vbUserDefinedType = 36
-    vbVariant = 12
+    vblonglong = 20
+    vbnull = 1
+    vbobject = 9
+    vbsingle = 4
+    vbstring = 8
+    vbuserdefinedtype = 36
+    vbvariant = 12
