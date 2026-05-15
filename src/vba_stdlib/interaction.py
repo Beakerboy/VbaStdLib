@@ -16,9 +16,9 @@ class Interaction:
                context: VBALong | None = None) -> VbMsgBoxResult:
 
         if title is None:
-            title = "Microsoft Excel"
+            title_str = "Microsoft Excel"
         else:
-            title = str(title)
+            title_str = str(title)
         if help_file is not None and context is None:
             # raise some sort of error
             pass
@@ -72,7 +72,7 @@ class Interaction:
             default_button = 4
         if default_button > len(button_list):
             default_button = 1
-        print(f"{title}\n{window_icon}\n{prompt}\n{button_text}")
+        print(f"{title_str}\n{window_icon}\n{prompt}\n{button_text}")
         user_supplied = input()
         tabs = user_supplied.count("\t")
         pos = (default_button + tabs - 1) % len(button_list)
