@@ -72,7 +72,7 @@ class Interaction:
             default_button = 4
         if default_button > len(button_list):
             default_button = 1
-        print(f"{title}\n{icon}\n{prompt}\n{button_text}")
+        print(f"{title}\n{window_icon}\n{prompt}\n{button_text}")
         user_supplied = input()
         tabs = user_supplied.count("\t")
         pos = (default_button + tabs - 1) % len(button_list)
