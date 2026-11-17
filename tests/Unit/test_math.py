@@ -9,3 +9,11 @@ def test_abs() -> None:
     assert isinstance(result, VBADouble)
     input2 = VBAInteger(-1)
     assert Math.abs(input2) == input
+
+
+def test_sqr() -> None:
+    input = VBAInteger(9)
+    result = Math.sqr(input)
+    expected = VBAInteger(3)
+    assert result == expected
+    assert isinstance(result, VBADouble)
