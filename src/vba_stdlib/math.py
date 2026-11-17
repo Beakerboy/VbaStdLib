@@ -58,7 +58,7 @@ class Math:
         return VBADouble(math.log(number.value))
 
     @classmethod
-    def rnd(cls, number: Optional[VBATypeBase] = None) -> VBADouble:
+    def rnd(cls: type[Math], number: Optional[VBATypeBase] = None) -> VBADouble:
         """
         Returns a pseudo-random single-precision floating point number less
         than 1 but >= 0.
