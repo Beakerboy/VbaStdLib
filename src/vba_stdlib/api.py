@@ -38,6 +38,18 @@ api = {
                             "optional": False,
                             "default": ""
                     }]
+                },
+                "sqr": {
+                    "name": "sqr",
+                    "type": "function",
+                    "project": "vba",
+                    "module": "math",
+                    "handle": getattr(Math, "sqr"),
+                    "params": [{
+                            "name": "number",
+                            "optional": False,
+                            "default": ""
+                    }]
                 }
             }
         }
