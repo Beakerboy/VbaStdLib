@@ -1,7 +1,7 @@
 from __future__ import annotations
 import math
 import random
-from typing import Any, Optional
+from typing import Optional
 from vba_types import VBADouble, VBATypeBase
 
 
@@ -58,7 +58,9 @@ class Math:
         return VBADouble(math.log(number.value))
 
     @classmethod
-    def rnd(cls: type[Math], number: Optional[VBATypeBase] = None) -> VBADouble:
+    def rnd(                                                       # noqa: N802
+            cls: type[Math],
+            number: Optional[VBATypeBase] = None) -> VBADouble:
         """
         Returns a pseudo-random single-precision floating point number less
         than 1 but >= 0.
