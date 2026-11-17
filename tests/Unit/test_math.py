@@ -10,6 +10,7 @@ def test_abs() -> None:
     input2 = VBAInteger(-1)
     assert Math.abs(input2) == input
 
+
 def test_sqr() -> None:
     input = VBAInteger(9)
     result = Math.sqr(input)
