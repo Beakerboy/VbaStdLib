@@ -8,7 +8,8 @@ from vba_types import VBADouble, VBATypeBase
 class Math:
 
     # The internal seed state tracker for tracking VBA Rnd states
-    _last_rnd_value: float = 0.7055475  # VBA's default initial unseeded baseline
+    # VBA's default initial unseeded baseline
+    _last_rnd_value: float = 0.7055475
 
     @staticmethod
     def abs(number: VBATypeBase) -> VBADouble:
@@ -34,7 +35,8 @@ class Math:
     def int(number: VBATypeBase) -> VBADouble:
         """
         Returns the integer portion of a number.
-        If negative, returns the first negative integer less than or equal to number.
+        If negative, returns the first negative integer less than or equal to
+        number.
         """
         return VBADouble(float(math.floor(number.value)))
 
@@ -42,7 +44,8 @@ class Math:
     def fix(number: VBATypeBase) -> VBADouble:
         """
         Returns the integer portion of a number.
-        If negative, returns the first negative integer greater than or equal to number.
+        If negative, returns the first negative integer greater than or equal
+        to number.
         """
         return VBADouble(float(math.trunc(number.value)))
 
@@ -50,16 +53,19 @@ class Math:
     def log(number: VBATypeBase) -> VBADouble:
         """Returns the natural logarithm of a number."""
         if number.value <= 0:
-            raise ValueError("VBA Log function argument must be greater than zero.")
+            msg = "VBA Log function argument must be greater than zero."
+            raise ValueError(msg)
         return VBADouble(math.log(number.value))
 
     @classmethod
     def rnd(cls, number: Optional[VBATypeBase] = None) -> VBADouble:
         """
-        Returns a pseudo-random single-precision floating point number less than 1 but >= 0.
-        
+        Returns a pseudo-random single-precision floating point number less
+        than 1 but >= 0.
+
         VBA Rnd behavior matrix:
-        - Less than 0: Returns the same number every time, using 'number' as the seed.
+        - Less than 0: Returns the same number every time, using 'number' as
+              the seed.
         - Greater than 0: Returns the next random number in the sequence.
         - Equal to 0: Returns the most recently generated random number.
         - Not supplied: Returns the next random number in the sequence.
@@ -74,7 +80,8 @@ class Math:
             elif val > 0:
                 cls._last_rnd_value = random.random()
             elif val == 0:
-                # Returns the exact last value generated without progressing sequence
+                # Returns the exact last value generated without progressing
+                # sequence
                 pass
 
         return VBADouble(cls._last_rnd_value)
