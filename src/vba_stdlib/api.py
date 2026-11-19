@@ -62,7 +62,19 @@ api = {
                             "optional": False,
                             "default": ""
                     }]
-                }
+                },
+                 "sin": {
+                    "name": "sin",
+                    "type": "function",
+                    "project": "vba",
+                    "module": "math",
+                    "handle": getattr(Math, "sin"),
+                    "params": [{
+                            "name": "number",
+                            "optional": False,
+                            "default": ""
+                    }]
+                },
             }
         }
     }
