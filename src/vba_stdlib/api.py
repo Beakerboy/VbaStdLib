@@ -39,6 +39,18 @@ api = {
                             "default": ""
                     }]
                 },
+                "cos": {
+                    "name": "cos",
+                    "type": "function",
+                    "project": "vba",
+                    "module": "math",
+                    "handle": getattr(Math, "cos"),
+                    "params": [{
+                            "name": "number",
+                            "optional": False,
+                            "default": ""
+                    }]
+                },
                 "sqr": {
                     "name": "sqr",
                     "type": "function",
